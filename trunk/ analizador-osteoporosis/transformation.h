@@ -1,14 +1,14 @@
 #ifndef TRANSFORMATION_H
 #define TRANSFORMATION_H
 
-#include <QImage>
+#include "osteoporosisimage.h"
 
 class Transformation
 {
 public:
     Transformation();
 
-    void aplicar(QImage * image);
+    virtual class OsteoporosisImage * aplicar(class OsteoporosisImage * image) = 0;
 };
 
 #endif // TRANSFORMATION_H

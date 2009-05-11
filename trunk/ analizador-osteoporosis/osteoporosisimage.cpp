@@ -8,9 +8,9 @@ void OsteoporosisImage::save(QString s){
     image.save(s);
 }
 
-//OsteoporosisImage *OsteoporosisImage::transformation(Transformation t){
-
-//}
+OsteoporosisImage *OsteoporosisImage::transform(Transformation* t){
+    return t->aplicar(this);
+}
 
 OsteoporosisImage::OsteoporosisImage(){
 }

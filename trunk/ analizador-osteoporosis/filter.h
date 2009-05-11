@@ -1,9 +1,11 @@
+#clase creada por nosotros.
+
 #ifndef FILTER_H
 #define FILTER_H
 
-#include "osteoporosisimage.h"
+#include "transformation.h"
 
-class Filter
+class Filter : public Transformation
 {
 private:
     int window[3][3];
@@ -12,7 +14,7 @@ private:
 public:
     Filter();
 
-   void aplicar(OsteoporosisImage* image);
+    //OsteoporosisImage * aplicar(OsteoporosisImage * image);
 };
 
 #endif // FILTER_H
