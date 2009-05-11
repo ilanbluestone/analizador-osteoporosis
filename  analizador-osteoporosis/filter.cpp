@@ -3,6 +3,5 @@
 Filter::Filter()
 {
 }
-void Filter::aplicar(OsteoporosisImage *i){
-     ;
-}
+
+//OsteoporosisImage * Filter::aplicar(OsteoporosisImage * image){}

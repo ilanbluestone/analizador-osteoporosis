@@ -1,8 +1,6 @@
 #include "transformation.h"
 
-Transformation::Transformation()
-{
+Transformation::Transformation(){
 }
 
-void Transformation::aplicar(QImage *image){
-}
+OsteoporosisImage * Transformation::aplicar(OsteoporosisImage *image){}

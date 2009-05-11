@@ -2,6 +2,8 @@
 #define OSTEOPOROSISIMAGE_H
 
 #include "transformation.h"
+
+#include <QString>
 #include <QImage>
 
 class OsteoporosisImage
@@ -11,7 +13,8 @@ private:
 public:
     void load(QString path);
     void save(QString path);
-    OsteoporosisImage *transformation (Transformation t);
+
+    OsteoporosisImage *transform(class Transformation* t);
 
     OsteoporosisImage();
 };
