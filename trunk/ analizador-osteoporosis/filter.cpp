@@ -3,5 +3,3 @@
 Filter::Filter()
 {
 }
-
-//OsteoporosisImage * Filter::aplicar(OsteoporosisImage * image){}

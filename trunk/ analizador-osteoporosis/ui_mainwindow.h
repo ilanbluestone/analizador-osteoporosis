@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Sat May 9 19:18:32 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Sun May 10 15:57:49 2009
+**      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -40,7 +40,6 @@ public:
     QHBoxLayout *horizontalLayout;
     QStackedWidget *stackedWidget;
     QWidget *page;
-    QHBoxLayout *horizontalLayout_2;
     QTabWidget *tabWidget;
     QWidget *tab;
     QToolButton *toolButton;
@@ -84,16 +83,6 @@ public:
         stackedWidget->setFrameShadow(QFrame::Plain);
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(page->sizePolicy().hasHeightForWidth());
-        page->setSizePolicy(sizePolicy);
-        horizontalLayout_2 = new QHBoxLayout(page);
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setMargin(11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
         stackedWidget->addWidget(page);
 
         horizontalLayout->addWidget(stackedWidget);
@@ -149,7 +138,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 691, 29));
+        menuBar->setGeometry(QRect(0, 0, 691, 25));
         menu_Archivo = new QMenu(menuBar);
         menu_Archivo->setObjectName(QString::fromUtf8("menu_Archivo"));
         MainWindowClass->setMenuBar(menuBar);

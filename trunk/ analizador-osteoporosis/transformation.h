@@ -8,7 +8,7 @@ class Transformation
 public:
     Transformation();
 
-    virtual class OsteoporosisImage * aplicar(class OsteoporosisImage * image) = 0;
+    virtual class OsteoporosisImage* apply(class OsteoporosisImage* image) = 0;
 };
 
 #endif // TRANSFORMATION_H

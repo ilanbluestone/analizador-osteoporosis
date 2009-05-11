@@ -1,6 +1,6 @@
 #include "transformation.h"
 
-Transformation::Transformation(){
+Transformation::Transformation()
+{
 }
 
-OsteoporosisImage * Transformation::aplicar(OsteoporosisImage *image){}
