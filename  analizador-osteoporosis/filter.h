@@ -1,5 +1,3 @@
-#clase creada por nosotros.
-
 #ifndef FILTER_H
 #define FILTER_H
 
@@ -8,13 +6,10 @@
 class Filter : public Transformation
 {
 private:
-    int window[3][3];
-    int windowSize;
+    int *window;
 
 public:
     Filter();
-
-    //OsteoporosisImage * aplicar(OsteoporosisImage * image);
 };
 
 #endif // FILTER_H

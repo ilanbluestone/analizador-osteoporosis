@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindowClass)
 {
     ui->setupUi(this);
-    this->initControls();
+       this->initControls();
 }
 
 void MainWindow::initControls()
