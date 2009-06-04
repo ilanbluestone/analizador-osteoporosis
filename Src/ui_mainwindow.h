@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Mon May 18 17:01:02 2009
+** Created: Thu Jun 4 13:01:28 2009
 **      by: Qt User Interface Compiler version 4.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -320,7 +320,6 @@ public:
         menuBasadas_en_gradiente->addAction(actionFrei_Chen);
 
         retranslateUi(MainWindowClass);
-        QObject::connect(stackedWidget, SIGNAL(customContextMenuRequested(QPoint)), MainWindowClass, SLOT(close()));
 
         tabWidget->setCurrentIndex(0);
 
