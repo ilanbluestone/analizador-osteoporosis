@@ -1,0 +1,28 @@
+ventana de convolución:
+
+	http://www.des.udc.es/~adriana/TercerCiclo/CursoImagen/curso/web/Filtrado_Espacial.html
+
+info teorica de filtro y deteccion de borde
+
+	http://catarina.udlap.mx/u_dl_a/tales/documentos/lis/ramos_r_m/capitulo3.pdf
+
+	http://www.ojodigital.com/foro/la-escuela-tutoriales-manuales-acciones-etc/162887-como-funciona-exactamente-un-filtro-paso-alto.html
+
+	http://www.aet.org.es/revistas/AET8_5.pdf
+
+Matriz filtro y detecion de borde:
+
+	http://www.quesabesde.com/camdig/articulos.asp?articulo=137
+
+	http://ocw.um.es/ciencias/herramientas-de-teledeteccion-aplicadas-a-la/material-de-clase-1/tema-6-tecnicas-de-filtrado.pdf
+
+	http://sabia.tic.udc.es/gc/Contenidos%20adicionales/trabajos/Imagenyvideo/Procesado%20Digital%20de%20la%20Imagen/pagina_superior6.htm
+
+
+Triangulo de ward:
+
+	http://www.aaomm.org.ar/Cap%2013.pdf
+
+	http://www.medilegis.com/BancoConocimiento/T/TM103N6_metodos/metodos2.htm
+
+	http://www.sabi.org.ar/anales/cd_2005/pdf/077PI.pdf
