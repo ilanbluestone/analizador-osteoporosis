@@ -22,7 +22,9 @@ SOURCES += main.cpp \
     northwestfilter.cpp \
     northeastfilter.cpp \
     southwestfilter.cpp \
-    southeastfilter.cpp
+    southeastfilter.cpp \
+    robertsfilter.cpp \
+    frei_chen.cpp
 HEADERS += mainwindow.h \
     osteoporosisimage.h \
     transformation.h \
@@ -41,5 +43,7 @@ HEADERS += mainwindow.h \
     northwestfilter.h \
     northeastfilter.h \
     southwestfilter.h \
-    southeastfilter.h
+    southeastfilter.h \
+    robertsfilter.h \
+    frei_chen.h
 FORMS += mainwindow.ui

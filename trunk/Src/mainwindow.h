@@ -53,7 +53,10 @@ private slots:
     void sobel();
     void prewitt();
     void complete();
-
+    void hightpass();
+    void lowpass();
+    void roberts();
+    void frei_chen();
 };
 
 #endif // MAINWINDOW_H

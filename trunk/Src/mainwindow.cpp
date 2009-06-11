@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "hightpassfilter.h"
+#include "lowpassfilter.h"
 #include "prewittfilter.h"
+#include "robertsfilter.h"
+#include "frei_chen.h"
 #include "sobelfilter.h"
 #include "southfilter.h"
 #include "northfilter.h"
@@ -31,7 +34,8 @@ void MainWindow::initControls()
     connect(this->ui->actionSalir,SIGNAL(triggered()),this,SLOT(close()));
     connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
     //aca modifique yo
-
+    connect(this->ui->actionPaso_Alto,SIGNAL(triggered()),this,SLOT(hightpass()));
+    connect(this->ui->actionPaso_Bajo,SIGNAL(triggered()),this,SLOT(lowpass()));
     connect(this->ui->actionNoroeste,SIGNAL(triggered()),this,SLOT(northWest()));
     connect(this->ui->actionNoreste,SIGNAL(triggered()),this,SLOT(northEast()));
     connect(this->ui->actionNorte,SIGNAL(triggered()),this,SLOT(north()));
@@ -42,7 +46,8 @@ void MainWindow::initControls()
     connect(this->ui->actionOeste,SIGNAL(triggered()),this,SLOT(west()));
     connect(this->ui->actionPrewitt,SIGNAL(triggered()),this,SLOT(prewitt()));
     connect(this->ui->actionSobel,SIGNAL(triggered()),this,SLOT(sobel()));
-    connect(this->ui->actionCompleto,SIGNAL(triggered()),this,SLOT(complete()));
+    connect(this->ui->actionRoberts,SIGNAL(triggered()),this,SLOT(roberts()));
+    connect(this->ui->actionFrei_Chen,SIGNAL(triggered()),this,SLOT(frei_chen()));
 }
 
 //esto lo agregue yo
@@ -100,6 +105,30 @@ void MainWindow::prewitt()
 {
     Filter* f= new PrewittFilter();
     this->applyFilter("Filtro Prewitt",f);
+}
+
+void MainWindow::hightpass()
+{
+    Filter* f= new HightPassFilter();
+    this->applyFilter("Filtro Paso Alto",f);
+}
+
+void MainWindow::lowpass()
+{
+    Filter* f= new LowPassFilter();
+    this->applyFilter("Filtro Paso Bajo",f);
+}
+
+void MainWindow::frei_chen()
+{
+    Filter* f= new Frei_ChenFilter();
+    this->applyFilter("Filtro Frei-Chen",f);
+}
+
+void MainWindow::roberts()
+{
+    Filter* f= new RobertsFilter();
+    this->applyFilter("Filtro Roberts",f);
 }
 
 void MainWindow::saveResult()

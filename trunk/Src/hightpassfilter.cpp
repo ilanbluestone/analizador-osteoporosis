@@ -9,7 +9,6 @@ HightPassFilter::HightPassFilter()
     matrix->set(1,0,a);matrix->set(1,1,b);matrix->set(1,2,a);
     matrix->set(2,0,a);matrix->set(2,1,a);matrix->set(2,2,a);
     mask.push_back(matrix);
-
 }
 
 HightPassFilter::~HightPassFilter()
