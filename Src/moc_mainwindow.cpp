@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Jun 4 13:01:52 2009
+** Created: Thu Jun 11 15:10:31 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   12, // methods
+      18,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -43,6 +43,10 @@ static const uint qt_meta_data_MainWindow[] = {
      148,   11,   11,   11, 0x08,
      156,   11,   11,   11, 0x08,
      166,   11,   11,   11, 0x08,
+     177,   11,   11,   11, 0x08,
+     189,   11,   11,   11, 0x08,
+     199,   11,   11,   11, 0x08,
+     209,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -52,7 +56,8 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "setCurrentPage(QTreeWidgetItem*)\0"
     "northWest()\0north()\0northEast()\0east()\0"
     "west()\0south()\0southWest()\0southEast()\0"
-    "sobel()\0prewitt()\0complete()\0"
+    "sobel()\0prewitt()\0complete()\0hightpass()\0"
+    "lowpass()\0roberts()\0frei_chen()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -94,9 +99,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 11: sobel(); break;
         case 12: prewitt(); break;
         case 13: complete(); break;
+        case 14: hightpass(); break;
+        case 15: lowpass(); break;
+        case 16: roberts(); break;
+        case 17: frei_chen(); break;
         default: ;
         }
-        _id -= 14;
+        _id -= 18;
     }
     return _id;
 }

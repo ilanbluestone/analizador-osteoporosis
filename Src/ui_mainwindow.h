@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Thu Jun 4 13:01:28 2009
+** Created: Thu Jun 11 14:42:58 2009
 **      by: Qt User Interface Compiler version 4.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -263,7 +263,7 @@ public:
         treeWidget->setRootIsDecorated(true);
         treeWidget->setItemsExpandable(true);
         treeWidget->setAnimated(true);
-        treeWidget->header()->setVisible(true);
+        treeWidget->header()->setVisible(false);
 
         verticalLayout_2->addWidget(treeWidget);
 
@@ -312,7 +312,6 @@ public:
         menuDireccionales->addAction(actionSureste);
         menuDireccionales->addAction(actionNoroeste);
         menuDireccionales->addAction(actionNoreste);
-        menuDireccionales->addAction(actionCompleto);
         menuBasadas_en_gradiente->addSeparator();
         menuBasadas_en_gradiente->addAction(actionRoberts);
         menuBasadas_en_gradiente->addAction(actionSobel);

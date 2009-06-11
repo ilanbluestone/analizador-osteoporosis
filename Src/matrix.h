@@ -6,12 +6,12 @@ class Matrix
 private:
     int rows;
     int columns;
-    int** values;
+    float** values;
 
 public:
     Matrix(int rows, int columns);
     int at(int r, int c);
-    void set(int r, int c, int value);
+    void set(int r, int c, float value);
     int getRows();
     int getColumns();
 };

@@ -229,7 +229,7 @@
           <bool>true</bool>
          </property>
          <attribute name="headerVisible">
-          <bool>true</bool>
+          <bool>false</bool>
          </attribute>
          <column>
           <property name="text">
@@ -286,7 +286,6 @@
       <addaction name="actionSureste"/>
       <addaction name="actionNoroeste"/>
       <addaction name="actionNoreste"/>
-      <addaction name="actionCompleto"/>
      </widget>
      <widget class="QMenu" name="menuBasadas_en_gradiente">
       <property name="title">
