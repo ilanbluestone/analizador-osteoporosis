@@ -6,23 +6,11 @@
  </data>
  <data>
   <variable>RunConfiguration0-Executable</variable>
-  <value type="QString" >/home/arturo/analizador-osteoporosis/Src/Analizador_Osteoporosis</value>
+  <value type="QString" >/home/walter/Proyectos/analizador-osteoporosis/Src/Analizador_Osteoporosis</value>
  </data>
  <data>
   <variable>RunConfiguration0-RunConfiguration.name</variable>
-  <value type="QString" >Analizador_Osteoporosis</value>
- </data>
- <data>
-  <variable>RunConfiguration0-UseTerminal</variable>
-  <value type="bool" >false</value>
- </data>
- <data>
-  <variable>RunConfiguration0-UserName</variable>
-  <value type="QString" >Analizador_Osteoporosis</value>
- </data>
- <data>
-  <variable>RunConfiguration0-UserSetName</variable>
-  <value type="bool" >true</value>
+  <value type="QString" >Run /home/walter/Proyectos/analizador-osteoporosis/Src/Analizador_Osteoporosis</value>
  </data>
  <data>
   <variable>RunConfiguration0-WorkingDirectory</variable>
@@ -43,14 +31,6 @@
  <data>
   <variable>RunConfiguration1-RunConfiguration.name</variable>
   <value type="QString" >Analizador_Osteoporosis</value>
- </data>
- <data>
-  <variable>RunConfiguration1-UseDyldImageSuffix</variable>
-  <value type="bool" >false</value>
- </data>
- <data>
-  <variable>RunConfiguration1-UseTerminal</variable>
-  <value type="bool" >false</value>
  </data>
  <data>
   <variable>RunConfiguration1-UserSetName</variable>
@@ -82,6 +62,7 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <value key="QtVersionId" type="int" >0</value>
    <value key="addQDumper" type="" ></value>
+   <value key="buildDirectory" type="QString" >/home/walter/Proyectos/analizador-osteoporosis/Src</value>
   </valuemap>
  </data>
  <data>
@@ -233,49 +214,46 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-FvaDErJFf6,guid=bba99f94ef4cd184bbf5fe7a4a30f6c2</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-RXeMqmiQuV,guid=c514dc4b90e64ba7c87e05424a316ae9</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >GDMSESSION=default</value>
     <value type="QString" >GDM_LANG=es_AR.UTF-8</value>
     <value type="QString" >GDM_XSERVER_LOCATION=local</value>
-    <value type="QString" >GNOME_DESKTOP_SESSION_ID=Default</value>
-    <value type="QString" >GNOME_KEYRING_PID=3601</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-GlsiGX/socket</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-eDJrJw/S.gpg-agent:3739:1</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/arturo/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HOME=/home/arturo</value>
+    <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
+    <value type="QString" >GNOME_KEYRING_PID=7642
+</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-5pOcMn/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-16NYGQ/S.gpg-agent:7621:1</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/walter/.gtkrc-1.2-gnome2</value>
+    <value type="QString" >HOME=/home/walter</value>
     <value type="QString" >LANG=es_AR.UTF-8</value>
-    <value type="QString" >LANGUAGE=</value>
-    <value type="QString" >LD_LIBRARY_PATH=/usr/lib64/qtcreator:</value>
-    <value type="QString" >LOGNAME=arturo</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-arturo</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/arturo</value>
-    <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/3616,unix/laptop:/tmp/.ICE-unix/3616</value>
+    <value type="QString" >LOGNAME=walter</value>
+    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-walter</value>
+    <value type="QString" >PATH=/home/walter/qtsdk-2009.01/qt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/walter</value>
+    <value type="QString" >QTDIR=/home/walter/qtsdk-2009.01/qt</value>
+    <value type="QString" >SESSION_MANAGER=local/walter-desktop:/tmp/.ICE-unix/7490</value>
     <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=3729</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-GlsiGX/socket.ssh</value>
-    <value type="QString" >USER=arturo</value>
-    <value type="QString" >USERNAME=arturo</value>
+    <value type="QString" >SSH_AGENT_PID=7557</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-5pOcMn/ssh</value>
+    <value type="QString" >USER=walter</value>
+    <value type="QString" >USERNAME=walter</value>
     <value type="QString" >WINDOWPATH=7</value>
-    <value type="QString" >XAUTHORITY=/tmp/.gdmI3LOVU</value>
-    <value type="QString" >XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=91cfcf72d3008fc4ebdc89544a002cd1-1244722880.675313-132234862</value>
+    <value type="QString" >XAUTHORITY=/tmp/.gdm99GJVU</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
+    <value type="QString" >XDG_SESSION_COOKIE=ad92bb93b000678cdef984664924901b-1244752615.376003-1112672197</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >/home/arturo/analizador-osteoporosis/Src/Analizador_Osteoporosis.pro</value>
+    <value type="QString" >/home/walter/Proyectos/analizador-osteoporosis/Src/Analizador_Osteoporosis.pro</value>
     <value type="QString" >-spec</value>
-    <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
+    <value type="QString" >linux-g++-64</value>
     <value type="QString" >-r</value>
    </valuelist>
-   <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.command" type="QString" >/home/walter/qtsdk-2009.01/qt/bin/qmake</value>
    <value key="abstractProcess.enabled" type="bool" >false</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/arturo/analizador-osteoporosis/Src</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/walter/Proyectos/analizador-osteoporosis/Src</value>
    <value key="buildConfiguration" type="int" >0</value>
   </valuemap>
  </data>
@@ -284,46 +262,43 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-FvaDErJFf6,guid=bba99f94ef4cd184bbf5fe7a4a30f6c2</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-RXeMqmiQuV,guid=c514dc4b90e64ba7c87e05424a316ae9</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >GDMSESSION=default</value>
     <value type="QString" >GDM_LANG=es_AR.UTF-8</value>
     <value type="QString" >GDM_XSERVER_LOCATION=local</value>
-    <value type="QString" >GNOME_DESKTOP_SESSION_ID=Default</value>
-    <value type="QString" >GNOME_KEYRING_PID=3601</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-GlsiGX/socket</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-eDJrJw/S.gpg-agent:3739:1</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/arturo/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HOME=/home/arturo</value>
+    <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
+    <value type="QString" >GNOME_KEYRING_PID=7642
+</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-5pOcMn/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-16NYGQ/S.gpg-agent:7621:1</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/walter/.gtkrc-1.2-gnome2</value>
+    <value type="QString" >HOME=/home/walter</value>
     <value type="QString" >LANG=es_AR.UTF-8</value>
-    <value type="QString" >LANGUAGE=</value>
-    <value type="QString" >LD_LIBRARY_PATH=/usr/lib64/qtcreator:</value>
-    <value type="QString" >LOGNAME=arturo</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-arturo</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/arturo</value>
-    <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/3616,unix/laptop:/tmp/.ICE-unix/3616</value>
+    <value type="QString" >LOGNAME=walter</value>
+    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-walter</value>
+    <value type="QString" >PATH=/home/walter/qtsdk-2009.01/qt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/walter</value>
+    <value type="QString" >QTDIR=/home/walter/qtsdk-2009.01/qt</value>
+    <value type="QString" >SESSION_MANAGER=local/walter-desktop:/tmp/.ICE-unix/7490</value>
     <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=3729</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-GlsiGX/socket.ssh</value>
-    <value type="QString" >USER=arturo</value>
-    <value type="QString" >USERNAME=arturo</value>
+    <value type="QString" >SSH_AGENT_PID=7557</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-5pOcMn/ssh</value>
+    <value type="QString" >USER=walter</value>
+    <value type="QString" >USERNAME=walter</value>
     <value type="QString" >WINDOWPATH=7</value>
-    <value type="QString" >XAUTHORITY=/tmp/.gdmI3LOVU</value>
-    <value type="QString" >XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=91cfcf72d3008fc4ebdc89544a002cd1-1244722880.675313-132234862</value>
+    <value type="QString" >XAUTHORITY=/tmp/.gdm99GJVU</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
+    <value type="QString" >XDG_SESSION_COOKIE=ad92bb93b000678cdef984664924901b-1244752615.376003-1112672197</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
     <value type="QString" >-w</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/arturo/analizador-osteoporosis/Src</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/walter/Proyectos/analizador-osteoporosis/Src</value>
   </valuemap>
  </data>
  <data>
@@ -331,38 +306,36 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ofi9LGwGO2,guid=e39d116ba9c8b8086f862aa54a27a906</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-RXeMqmiQuV,guid=c514dc4b90e64ba7c87e05424a316ae9</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
     <value type="QString" >GDMSESSION=default</value>
     <value type="QString" >GDM_LANG=es_AR.UTF-8</value>
     <value type="QString" >GDM_XSERVER_LOCATION=local</value>
-    <value type="QString" >GNOME_DESKTOP_SESSION_ID=Default</value>
-    <value type="QString" >GNOME_KEYRING_PID=3559</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-ACzu8g/socket</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-ftcADx/S.gpg-agent:3693:1</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/arturo/.gtkrc-1.2-gnome2</value>
-    <value type="QString" >HOME=/home/arturo</value>
+    <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
+    <value type="QString" >GNOME_KEYRING_PID=7642
+</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-5pOcMn/socket</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/seahorse-16NYGQ/S.gpg-agent:7621:1</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/walter/.gtkrc-1.2-gnome2</value>
+    <value type="QString" >HOME=/home/walter</value>
     <value type="QString" >LANG=es_AR.UTF-8</value>
-    <value type="QString" >LD_LIBRARY_PATH=/usr/lib64/qtcreator:</value>
-    <value type="QString" >LOGNAME=arturo</value>
-    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-arturo</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/arturo</value>
-    <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/laptop:@/tmp/.ICE-unix/3573,unix/laptop:/tmp/.ICE-unix/3573</value>
+    <value type="QString" >LOGNAME=walter</value>
+    <value type="QString" >ORBIT_SOCKETDIR=/tmp/orbit-walter</value>
+    <value type="QString" >PATH=/home/walter/qtsdk-2009.01/qt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/walter</value>
+    <value type="QString" >QTDIR=/home/walter/qtsdk-2009.01/qt</value>
+    <value type="QString" >SESSION_MANAGER=local/walter-desktop:/tmp/.ICE-unix/7490</value>
     <value type="QString" >SHELL=/bin/bash</value>
-    <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=3683</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-ACzu8g/socket.ssh</value>
-    <value type="QString" >USER=arturo</value>
-    <value type="QString" >USERNAME=arturo</value>
+    <value type="QString" >SSH_AGENT_PID=7557</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-5pOcMn/ssh</value>
+    <value type="QString" >USER=walter</value>
+    <value type="QString" >USERNAME=walter</value>
     <value type="QString" >WINDOWPATH=7</value>
-    <value type="QString" >XAUTHORITY=/tmp/.gdmVBWWUU</value>
-    <value type="QString" >XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=91cfcf72d3008fc4ebdc89544a002cd1-1244113157.242601-1720529408</value>
+    <value type="QString" >XAUTHORITY=/tmp/.gdm99GJVU</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
+    <value type="QString" >XDG_SESSION_COOKIE=ad92bb93b000678cdef984664924901b-1244752615.376003-1112672197</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
     <value type="QString" >clean</value>
@@ -370,7 +343,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/arturo/analizador-osteoporosis/Src</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/walter/Proyectos/analizador-osteoporosis/Src</value>
   </valuemap>
  </data>
  <data>

@@ -30,6 +30,9 @@
        <enum>QFrame::NoFrame</enum>
       </property>
       <widget class="QWidget" name="stackedWidgetPage1">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout"/>
       </widget>
      </widget>
@@ -254,7 +257,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>29</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Archivo">
@@ -300,28 +303,26 @@
      <addaction name="menuDireccionales"/>
      <addaction name="menuBasadas_en_gradiente"/>
     </widget>
-    <addaction name="actionPaso_Alto"/>
-    <addaction name="actionPaso_Bajo"/>
+    <widget class="QMenu" name="menuRealce">
+     <property name="title">
+      <string>Realce</string>
+     </property>
+     <addaction name="actionPaso_Alto"/>
+    </widget>
+    <widget class="QMenu" name="menuOtros">
+     <property name="title">
+      <string>Otros</string>
+     </property>
+     <addaction name="actionPaso_Bajo"/>
+    </widget>
+    <addaction name="menuRealce"/>
     <addaction name="menuDeteccion_de_bordes"/>
+    <addaction name="menuOtros"/>
    </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuFiltros"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <property name="movable">
-    <bool>false</bool>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
   <action name="actionAbrir_imagen">
    <property name="text">
     <string>Abrir imagen</string>
