@@ -33,7 +33,6 @@ void MainWindow::initControls()
     connect(this->ui->actionGuardar_resultados,SIGNAL(triggered()),this,SLOT(saveResult()));
     connect(this->ui->actionSalir,SIGNAL(triggered()),this,SLOT(close()));
     connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
-    //aca modifique yo
     connect(this->ui->actionPaso_Alto,SIGNAL(triggered()),this,SLOT(hightpass()));
     connect(this->ui->actionPaso_Bajo,SIGNAL(triggered()),this,SLOT(lowpass()));
     connect(this->ui->actionNoroeste,SIGNAL(triggered()),this,SLOT(northWest()));
@@ -48,59 +47,65 @@ void MainWindow::initControls()
     connect(this->ui->actionSobel,SIGNAL(triggered()),this,SLOT(sobel()));
     connect(this->ui->actionRoberts,SIGNAL(triggered()),this,SLOT(roberts()));
     connect(this->ui->actionFrei_Chen,SIGNAL(triggered()),this,SLOT(frei_chen()));
+    connect(this->ui->tbSelectZone,SIGNAL(pressed()),this,SLOT(setAction_SelRegion()));
+    connect(this->ui->tbSelectTWard,SIGNAL(pressed()),this,SLOT(setAction_SelTWard()));
+    connect(this->ui->tbSelectCP,SIGNAL(pressed()),this,SLOT(setAction_SelCP()));
 }
 
-//esto lo agregue yo
 void MainWindow::north()
 {
     Filter* f= new NorthFilter();
     this->applyFilter("Filtro Norte",f);
 }
+
 void MainWindow::south()
 {
     Filter* f= new SouthFilter();
     this->applyFilter("Filtro Sur",f);
 }
+
 void MainWindow::southEast()
 {
     Filter* f= new SouthEastFilter();
     this->applyFilter("Filtro Sureste",f);
 }
+
 void MainWindow::southWest()
 {
     Filter* f= new SouthWestFilter();
     this->applyFilter("Filtro Suroeste",f);
 }
+
 void MainWindow::northEast()
 {
     Filter* f= new NorthEastFilter();
     this->applyFilter("Filtro Noreste",f);
 }
+
 void MainWindow::northWest()
 {
     Filter* f= new NorthWestFilter();
     this->applyFilter("Filtro Noroeste",f);
 }
 
-void MainWindow::complete()
-{
-
-}
 void MainWindow::east()
 {
     Filter* f= new EastFilter();
     this->applyFilter("Filtro Este",f);
 }
+
 void MainWindow::west()
 {
     Filter* f= new WestFilter();
     this->applyFilter("Filtro Oeste",f);
 }
+
 void MainWindow::sobel()
 {
     Filter* f= new SobelFilter();
     this->applyFilter("Filtro Sobel",f);
 }
+
 void MainWindow::prewitt()
 {
     Filter* f= new PrewittFilter();
@@ -132,35 +137,15 @@ void MainWindow::roberts()
 }
 
 void MainWindow::saveResult()
-{ /*
-    QTreeWidgetItem* padre = this->pages.at(this->ui->stackedWidget->currentIndex()-1);
-    QTreeWidgetItem* nuevo = new QTreeWidgetItem(padre);
-    //name
-    nuevo->setText(1,"Aplicado filtro paso alto");
-
-    nuevo->setText(0,padre->text(0)+tr(" + filtro"));
-    HightPassFilter* transformation = new HightPassFilter();
-    OsteoporosisImage* image = this->images.at(this->ui->stackedWidget->currentIndex()-1);
-    OsteoporosisImage* newImage = image->transform(new HightPassFilter());
-    this->images.push_back(newImage);
-    QScrollArea* scrollArea = new QScrollArea(this->ui->stackedWidget);
-    QImagePage* page = new QImagePage(newImage->getImage(),scrollArea);
-    scrollArea->setWidget(page);
-    this->ui->stackedWidget->addWidget(scrollArea);
-    this->ui->stackedWidget->setCurrentWidget(scrollArea);
-    this->pages.push_back(nuevo);*/
-
-    //nuevo->setIcon(0,QIcon(QPixmap(image->getImage()->));
+{
 }
 
-//esto agregue yo
 void MainWindow::applyFilter (QString name,Filter* f)
 {
-    QTreeWidgetItem* father = this->pages.at(this->ui->stackedWidget->currentIndex()-1);
+    QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
     QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-    OsteoporosisImage* image = this->images.at(this->ui->stackedWidget->currentIndex()-1);
+    OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
     OsteoporosisImage* newImage = image->transform(f);
-    this->images.push_back(newImage);
     this->addImagePage(newImage, name, "Imagen con filtro aplicado", newElement);
 }
 
@@ -169,7 +154,6 @@ void MainWindow::openImage()
     QString fileName = QFileDialog::getOpenFileName(this,tr("Abrir imagen..."),"/home",tr("Images (*.png *.bmp *.jpg)"));
     if (!fileName.isEmpty()){
         OsteoporosisImage* image = new OsteoporosisImage(fileName);
-        this->images.push_back(image);
         QIcon* icon = new QIcon(fileName);
         QTreeWidgetItem* treeElement = new QTreeWidgetItem(this->ui->treeWidget);
         this->addImagePage(image, fileName, "Versión original de la imagen", treeElement, icon);
@@ -179,27 +163,40 @@ void MainWindow::openImage()
 void MainWindow::addImagePage(OsteoporosisImage *image, QString name, QString description, QTreeWidgetItem* treeElement, QIcon* icon)
 {
     QScrollArea* scrollArea = new QScrollArea(this->ui->stackedWidget);
-    QImagePage* page = new QImagePage(image->getImage(),scrollArea);
+    QImagePage* page = new QImagePage(image,scrollArea);
     scrollArea->setWidget(page);
+    this->imagePages.push_back(page);
     this->ui->stackedWidget->addWidget(scrollArea);
     this->ui->stackedWidget->setCurrentWidget(scrollArea);
-    this->pages.push_back(treeElement);
+    this->pageLinks.push_back(treeElement);
     treeElement->setText(0,name);
     if (icon) treeElement->setIcon(0,*icon);
     treeElement->setText(1,QString().fromLocal8Bit(description.toLatin1().data()));
-
+    this->ui->treeWidget->setCurrentItem(treeElement);
 }
 
-void MainWindow::setCurrentPage(QTreeWidgetItem* item)
+void MainWindow::setCurrentPage(QTreeWidgetItem *item)
 {
-    int position = this->pages.indexOf(item) + 1;
+    int position = this->pageLinks.indexOf(item) + 1;
     if (position != 0) this->ui->stackedWidget->setCurrentIndex(position);
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *e)
+void MainWindow::setAction_SelRegion()
 {
-    QPoint p(e->x(),e->y());
-    qDebug() << p;
+    int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
+    if (position != -1){
+        QImagePage* page = this->imagePages.at(position);
+        page->setAction(SEL_REGION);
+    }
+}
+
+void MainWindow::setAction_SelTWard()
+{
+
+}
+
+void MainWindow::setAction_SelCP()
+{
 
 }
 

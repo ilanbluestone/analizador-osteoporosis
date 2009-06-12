@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Thu Jun 11 14:42:58 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Thu Jun 11 21:53:36 2009
+**      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -24,7 +24,6 @@
 #include <QtGui/QStackedWidget>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
-#include <QtGui/QToolBar>
 #include <QtGui/QToolButton>
 #include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
@@ -85,8 +84,9 @@ public:
     QMenu *menuDeteccion_de_bordes;
     QMenu *menuDireccionales;
     QMenu *menuBasadas_en_gradiente;
+    QMenu *menuRealce;
+    QMenu *menuOtros;
     QStatusBar *statusBar;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
@@ -141,6 +141,7 @@ public:
         stackedWidget->setFrameShape(QFrame::NoFrame);
         stackedWidgetPage1 = new QWidget();
         stackedWidgetPage1->setObjectName(QString::fromUtf8("stackedWidgetPage1"));
+        stackedWidgetPage1->setEnabled(false);
         verticalLayout = new QVBoxLayout(stackedWidgetPage1);
         verticalLayout->setSpacing(6);
         verticalLayout->setMargin(11);
@@ -273,7 +274,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 29));
+        menuBar->setGeometry(QRect(0, 0, 800, 25));
         menu_Archivo = new QMenu(menuBar);
         menu_Archivo->setObjectName(QString::fromUtf8("menu_Archivo"));
         menuFiltros = new QMenu(menuBar);
@@ -284,14 +285,14 @@ public:
         menuDireccionales->setObjectName(QString::fromUtf8("menuDireccionales"));
         menuBasadas_en_gradiente = new QMenu(menuDeteccion_de_bordes);
         menuBasadas_en_gradiente->setObjectName(QString::fromUtf8("menuBasadas_en_gradiente"));
+        menuRealce = new QMenu(menuFiltros);
+        menuRealce->setObjectName(QString::fromUtf8("menuRealce"));
+        menuOtros = new QMenu(menuFiltros);
+        menuOtros->setObjectName(QString::fromUtf8("menuOtros"));
         MainWindowClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindowClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindowClass->setStatusBar(statusBar);
-        toolBar = new QToolBar(MainWindowClass);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        toolBar->setMovable(false);
-        MainWindowClass->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menuBar->addAction(menu_Archivo->menuAction());
         menuBar->addAction(menuFiltros->menuAction());
@@ -299,9 +300,9 @@ public:
         menu_Archivo->addAction(actionGuardar_resultados);
         menu_Archivo->addSeparator();
         menu_Archivo->addAction(actionSalir);
-        menuFiltros->addAction(actionPaso_Alto);
-        menuFiltros->addAction(actionPaso_Bajo);
+        menuFiltros->addAction(menuRealce->menuAction());
         menuFiltros->addAction(menuDeteccion_de_bordes->menuAction());
+        menuFiltros->addAction(menuOtros->menuAction());
         menuDeteccion_de_bordes->addAction(menuDireccionales->menuAction());
         menuDeteccion_de_bordes->addAction(menuBasadas_en_gradiente->menuAction());
         menuDireccionales->addAction(actionEste);
@@ -317,6 +318,8 @@ public:
         menuBasadas_en_gradiente->addAction(actionSobel);
         menuBasadas_en_gradiente->addAction(actionPrewitt);
         menuBasadas_en_gradiente->addAction(actionFrei_Chen);
+        menuRealce->addAction(actionPaso_Alto);
+        menuOtros->addAction(actionPaso_Bajo);
 
         retranslateUi(MainWindowClass);
 
@@ -378,7 +381,8 @@ public:
         menuDeteccion_de_bordes->setTitle(QApplication::translate("MainWindowClass", "Deteccion de bordes", 0, QApplication::UnicodeUTF8));
         menuDireccionales->setTitle(QApplication::translate("MainWindowClass", "Direccionales", 0, QApplication::UnicodeUTF8));
         menuBasadas_en_gradiente->setTitle(QApplication::translate("MainWindowClass", "Basadas en gradiente", 0, QApplication::UnicodeUTF8));
-        toolBar->setWindowTitle(QApplication::translate("MainWindowClass", "toolBar", 0, QApplication::UnicodeUTF8));
+        menuRealce->setTitle(QApplication::translate("MainWindowClass", "Realce", 0, QApplication::UnicodeUTF8));
+        menuOtros->setTitle(QApplication::translate("MainWindowClass", "Otros", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

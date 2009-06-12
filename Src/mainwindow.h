@@ -27,21 +27,20 @@ public:
 
 private:
     Ui::MainWindowClass *ui;
-    QList<QTreeWidgetItem*> pages;
-    QList<OsteoporosisImage*> images;
-    //esto agregue yo
+    QList<QTreeWidgetItem*> pageLinks;
+    QList<QImagePage*> imagePages;
+
     void applyFilter (QString name, Filter* f);
     void addImagePage(OsteoporosisImage* image, QString name, QString description, QTreeWidgetItem* treeElement, QIcon* icon = 0);
-
     void initControls();
-
-protected:
-    void mousePressEvent(QMouseEvent *);
 
 private slots:
     void openImage();
     void saveResult();
     void setCurrentPage(QTreeWidgetItem*);
+    void setAction_SelRegion();
+    void setAction_SelTWard();
+    void setAction_SelCP();
     void northWest();
     void north();
     void northEast();
@@ -52,7 +51,6 @@ private slots:
     void southEast();
     void sobel();
     void prewitt();
-    void complete();
     void hightpass();
     void lowpass();
     void roberts();
