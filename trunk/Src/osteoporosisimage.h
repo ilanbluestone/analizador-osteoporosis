@@ -19,6 +19,7 @@ public:
     void saveAs(QString path);
     void save();
     void copyFrom(OsteoporosisImage* image);
+    void normalize();
     int getWidth();
     int getHeight();
     QSize getSize();

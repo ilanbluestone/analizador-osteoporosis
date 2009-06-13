@@ -15,9 +15,9 @@ OsteoporosisImage::OsteoporosisImage(QSize size)
 
 OsteoporosisImage* OsteoporosisImage::cut(QPoint begin, QPoint end)
 {
-    QImage* qimage = &(this->image->copy(QRect(begin,end)));
+    QImage qimage = this->image->copy(QRect(begin,end));
     OsteoporosisImage* image = new OsteoporosisImage();
-    image->setImage(qimage);
+    image->setImage(&qimage);
     return image;
 }
 
@@ -57,7 +57,7 @@ QImage *OsteoporosisImage::getImage()
 
 void OsteoporosisImage::setImage(QImage *image)
 {
-    this->image = image;
+    this->image = new QImage(*image);
 }
 
 void OsteoporosisImage::setImagePath(QString path)
@@ -107,4 +107,24 @@ OsteoporosisImage* OsteoporosisImage::clone()
     clon->setImage(this->getImage());
     clon->setImagePath(this->getImagePath());
     return clon;
+}
+
+void OsteoporosisImage::normalize()
+{
+    int min, max;
+    min = max = qGray(this->image->pixel(0,0));
+    for (int j=0; j < this->image->height(); j++)
+        for (int i=0; i < this->image->width(); i++)
+        {
+            int color = qGray(this->image->pixel(i,j));
+            if (min > color) min = color;
+            if (max < color) max = color;
+        }
+    for (int j=0; j < this->image->height(); j++)
+        for (int i=0; i < this->image->width(); i++)
+        {
+            float color = qGray(this->image->pixel(i,j));
+            color = (((color - min)/(max - min))*255);
+            this->image->setPixel(i,j,qRgb(color,color,color));
+        }
 }

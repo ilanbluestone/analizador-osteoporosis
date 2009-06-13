@@ -41,6 +41,7 @@ private slots:
     void setAction_SelRegion();
     void setAction_SelTWard();
     void setAction_SelCP();
+    void addUserSelection(OsteoporosisImage*);
     void northWest();
     void north();
     void northEast();
