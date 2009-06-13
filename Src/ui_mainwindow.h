@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Thu Jun 11 21:53:36 2009
-**      by: Qt User Interface Compiler version 4.5.0
+** Created: Sat Jun 13 12:17:03 2009
+**      by: Qt User Interface Compiler version 4.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -264,7 +264,7 @@ public:
         treeWidget->setRootIsDecorated(true);
         treeWidget->setItemsExpandable(true);
         treeWidget->setAnimated(true);
-        treeWidget->header()->setVisible(false);
+        treeWidget->header()->setVisible(true);
 
         verticalLayout_2->addWidget(treeWidget);
 
@@ -274,7 +274,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 25));
+        menuBar->setGeometry(QRect(0, 0, 800, 29));
         menu_Archivo = new QMenu(menuBar);
         menu_Archivo->setObjectName(QString::fromUtf8("menu_Archivo"));
         menuFiltros = new QMenu(menuBar);

@@ -15,7 +15,6 @@ private:
 
 protected:
 
-    //int matrix[3][3];
     QVector <Matrix *> mask;
     Matrix* getPonderationMatrix(OsteoporosisImage* );
 

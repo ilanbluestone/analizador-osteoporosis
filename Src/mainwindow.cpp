@@ -160,10 +160,18 @@ void MainWindow::openImage()
     }
 }
 
+void MainWindow::addUserSelection(OsteoporosisImage* selection)
+{
+    QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+    QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+    selection->normalize();
+    this->addImagePage(selection, "Seleccion", "Region de interes", newElement);
+}
+
 void MainWindow::addImagePage(OsteoporosisImage *image, QString name, QString description, QTreeWidgetItem* treeElement, QIcon* icon)
 {
     QScrollArea* scrollArea = new QScrollArea(this->ui->stackedWidget);
-    QImagePage* page = new QImagePage(image,scrollArea);
+    QImagePage* page = new QImagePage(image,this,scrollArea);
     scrollArea->setWidget(page);
     this->imagePages.push_back(page);
     this->ui->stackedWidget->addWidget(scrollArea);
@@ -177,8 +185,8 @@ void MainWindow::addImagePage(OsteoporosisImage *image, QString name, QString de
 
 void MainWindow::setCurrentPage(QTreeWidgetItem *item)
 {
-    int position = this->pageLinks.indexOf(item) + 1;
-    if (position != 0) this->ui->stackedWidget->setCurrentIndex(position);
+    int position = this->pageLinks.indexOf(item);
+    if (position != -1) this->ui->stackedWidget->setCurrentIndex(position+1);
 }
 
 void MainWindow::setAction_SelRegion()

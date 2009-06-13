@@ -3,27 +3,30 @@
 #include <QVariant>
 #include <QMouseEvent>
 #include <QDebug>
+#include "mainwindow.h"
 
-QImagePage::QImagePage(QWidget* parent) : QWidget(parent)
+QImagePage::QImagePage(MainWindow* mainWindow, QWidget* parent) : QWidget(parent)
 {
     this->image = new OsteoporosisImage(QSize(500,500));
     this->board = new QImage(500,500,QImage::Format_ARGB32);
     this->board->fill(qRgba(0,0,0,0));
     this->setMinimumSize(500,500);
-    this->mainWindow = parent;
     this->currentAction = NOTHING;
     this->currentState = UNDEFINED;
+    this->mainWindow = mainWindow;
+    connect(this,SIGNAL(returnSelection(OsteoporosisImage*)),this->mainWindow,SLOT(addUserSelection(OsteoporosisImage*)));
 }
 
-QImagePage::QImagePage(OsteoporosisImage* image, QWidget* parent) : QWidget(parent)
+QImagePage::QImagePage(OsteoporosisImage* image, MainWindow* mainWindow, QWidget* parent) : QWidget(parent)
 {
     this->image = image;
     this->setMinimumSize(image->getWidth(),image->getHeight());
     this->board = new QImage(image->getWidth(),image->getHeight(),QImage::Format_ARGB32);
     this->board->fill(qRgba(0,0,0,0));
-    this->mainWindow = parent;
     this->currentAction = NOTHING;
     this->currentState = UNDEFINED;
+    this->mainWindow = mainWindow;
+    connect(this,SIGNAL(returnSelection(OsteoporosisImage*)),this->mainWindow,SLOT(addUserSelection(OsteoporosisImage*)));
 }
 
 void QImagePage::paintEvent(QPaintEvent* )
@@ -74,7 +77,11 @@ void QImagePage::mouseReleaseEvent(QMouseEvent* event)
     {
         case NOTHING: break;
         case SEL_REGION:{
-                        this->currentState = FINISHED;
+                        OsteoporosisImage* selection = this->image->cut(this->points.first(),this->points.last());
+                        this->clearBoard();
+                        this->points.clear();
+                        this->currentState = UNDEFINED;
+                        emit this->returnSelection(selection);
                     } break;
         case SEL_TWARD: break;
         case SEL_CP: break;
@@ -107,3 +114,9 @@ void QImagePage::draw()
         case SEL_CP: break;
     }
 }
+
+void QImagePage::clearBoard()
+{
+    this->board->fill(qRgba(0,0,0,0));
+}
+
