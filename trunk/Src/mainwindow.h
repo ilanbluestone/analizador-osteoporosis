@@ -7,9 +7,7 @@
 #include <QList>
 #include "osteoporosisimage.h"
 #include "qimagepage.h"
-#include <QMouseEvent>
 
-//esto agregue yo
 #include "filter.h"
 
 namespace Ui
@@ -56,6 +54,7 @@ private slots:
     void lowpass();
     void roberts();
     void frei_chen();
+    void histogram();
 };
 
 #endif // MAINWINDOW_H

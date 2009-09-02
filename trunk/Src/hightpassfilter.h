@@ -5,9 +5,16 @@
 
 class HightPassFilter : public Filter
 {
+private:
+   // Matrix* getPonderationMatrix(OsteoporosisImage *image);
+   // int getPonderation(int i, int j,OsteoporosisImage* image,int minc, int maxc,int media);
+   // class OsteoporosisImage* normalize(Matrix* values);
+
 public:
     HightPassFilter();
     ~HightPassFilter();
+    // class OsteoporosisImage* apply(class OsteoporosisImage* image);
+
 };
 
 #endif // HIGHTPASSFILTER_H

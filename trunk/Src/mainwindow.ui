@@ -38,10 +38,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QFrame" name="frame">
       <property name="minimumSize">
        <size>
-        <width>220</width>
+        <width>240</width>
         <height>0</height>
        </size>
       </property>
@@ -99,41 +99,27 @@
             <number>9</number>
            </property>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Seleccionar cuadrante:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QToolButton" name="tbSelectCu">
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>Seleccionar área de Interés:</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="1" column="1">
             <widget class="QToolButton" name="tbSelectZone">
              <property name="text">
               <string>...</string>
              </property>
             </widget>
            </item>
-           <item row="3" column="1">
-            <widget class="QToolButton" name="tbApplyFilter">
+           <item row="2" column="0">
+            <widget class="QLabel" name="lbBordes">
              <property name="text">
-              <string>...</string>
+              <string>Detectar bordes:</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="2" column="1">
             <widget class="QToolButton" name="tbDetectBorders">
              <property name="text">
               <string>...</string>
@@ -141,58 +127,44 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="lbFiltroPA">
-             <property name="text">
-              <string>Aplicar filtro paso alto:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="lbBordes">
-             <property name="text">
-              <string>Detectar bordes:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QToolButton" name="tbSelectTWard">
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
             <widget class="QLabel" name="label">
              <property name="text">
               <string>Marcar Triángulo de Ward:</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="0">
+           <item row="3" column="1">
+            <widget class="QToolButton" name="tbSelectTWard">
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
               <string>Marcar Compresivo Principal:</string>
              </property>
             </widget>
            </item>
-           <item row="6" column="1">
+           <item row="4" column="1">
             <widget class="QToolButton" name="tbSelectCP">
              <property name="text">
               <string>...</string>
              </property>
             </widget>
            </item>
-           <item row="7" column="1">
-            <widget class="QToolButton" name="tbDiagnosticate">
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
               <string>Determinar diagnóstico:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QToolButton" name="tbDiagnosticate">
+             <property name="text">
+              <string>...</string>
              </property>
             </widget>
            </item>
@@ -322,8 +294,15 @@
     <addaction name="menuDeteccion_de_bordes"/>
     <addaction name="menuOtros"/>
    </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="actionHistograma"/>
+   </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuFiltros"/>
+   <addaction name="menuHerramientas"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAbrir_imagen">
@@ -428,10 +407,21 @@
     <string>Completo</string>
    </property>
   </action>
+  <action name="actionHistograma">
+   <property name="text">
+    <string>Histograma</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>tbSelectCu</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>tbSelectZone</tabstop>
+  <tabstop>tbDetectBorders</tabstop>
+  <tabstop>tbSelectTWard</tabstop>
+  <tabstop>tbSelectCP</tabstop>
+  <tabstop>tbDiagnosticate</tabstop>
+  <tabstop>treeWidget</tabstop>
  </tabstops>
  <resources/>
  <connections/>
