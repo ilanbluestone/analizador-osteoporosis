@@ -4,6 +4,8 @@
 #include <QPen>
 #include <QColor>
 #include <QtGui/QDialog>
+#include "osteoporosisimage.h"
+
 
 namespace Ui {
     class DialogHistograma;
@@ -12,21 +14,27 @@ namespace Ui {
 class DialogHistograma : public QDialog {
     Q_OBJECT
     Q_DISABLE_COPY(DialogHistograma)
-public:
+
+ public:
     explicit DialogHistograma(QWidget *parent = 0);
     virtual ~DialogHistograma();
-    void setAvgs(float *);
-    float getAvgsMax();
+    long getcounterMax();
+
+    void setImage(OsteoporosisImage* i);
+    void getCount();
+
 
 protected:
     void paintEvent(QPaintEvent *);
-
-protected:
     virtual void changeEvent(QEvent *e);
 
 private:
+    long* counter;
+
+    void initCount();
     Ui::DialogHistograma *m_ui;
-    float * avgs;
+    OsteoporosisImage* image;
+
 };
 
 #endif // DIALOGHISTOGRAMA_H

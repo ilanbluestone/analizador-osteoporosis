@@ -19,21 +19,30 @@ public:
     void saveAs(QString path);
     void save();
     void copyFrom(OsteoporosisImage* image);
-    void normalize();
+    void setPixelColorAt(int x, int y, QRgb color);
+    void setColorAt(int x, int y, int color);
     int getWidth();
     int getHeight();
+    int getColorAt(int x, int y);
+    int getColorMax();
+    int getColorMin();
+    long getMax(long* counter);
+    long getMin(long* counter);
+    int getMedia();
     QSize getSize();
     QRgb getPixelColorAt(int x, int y);
-    void setPixelColorAt(int x, int y, QRgb color);
     QString getImagePath();
     QImage* getImage();
     OsteoporosisImage* cut (QPoint begin, QPoint end);
     OsteoporosisImage* clone();
     OsteoporosisImage* transform(class Transformation* t);
+    OsteoporosisImage* getHstogramImage();
     OsteoporosisImage();
     OsteoporosisImage(QSize size);
     OsteoporosisImage(QString path);
-
+    long* getHistogram();
+    OsteoporosisImage* normalize(int, int);
+    int* normalize(long* counter);
 
 };
 

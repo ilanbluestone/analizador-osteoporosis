@@ -5,18 +5,18 @@
 #include "matrix.h"
 #include <QVector>
 
+#define maxim 5678
+
 class Filter : public Transformation
 {
 private:
-    int max, min;
-
-    int getPonderation(int i, int j,OsteoporosisImage* image);
-    class OsteoporosisImage* normalize(Matrix* values);
+    int getPonderation(int i, int j,OsteoporosisImage* image,int minc, int maxc, int media);
 
 protected:
-
+    int max, min, minc, maxc;
     QVector <Matrix *> mask;
     Matrix* getPonderationMatrix(OsteoporosisImage* );
+    class OsteoporosisImage* normalize(Matrix* values);
 
 public:
 

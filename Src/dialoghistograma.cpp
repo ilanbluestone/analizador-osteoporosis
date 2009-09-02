@@ -9,69 +9,83 @@ DialogHistograma::DialogHistograma(QWidget *parent) :
     m_ui->setupUi(this);
 }
 
+
 DialogHistograma::~DialogHistograma()
 {
     delete m_ui;
 }
 
-
-void DialogHistograma::setAvgs(float * vector)
+void DialogHistograma::setImage(OsteoporosisImage* i)
 {
-    avgs = vector;
+    image=i;
 }
 
-
-float DialogHistograma::getAvgsMax()
+void DialogHistograma::getCount()
 {
-    float max = 0;
+    this->counter = image->getHistogram();
+}
 
-    for(int i = 0; i < 256; i++)
-    {
-        if(avgs[i] > max)
-            max = avgs[i];
-    }
+void DialogHistograma::initCount()
+{
+    counter= new long[256];
+    for (int i=0; i<256;i++)
+         counter[i]=0;
+}
 
-return max;
+long DialogHistograma::getcounterMax()
+{
+    long max;
+    max =counter[0];
+
+        for (int i=1; i < 256; i++)
+        {
+            long aux=counter[i];
+            if (max < aux) max = aux;
+        }
+    return max;
 }
 
 
 void DialogHistograma::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
+   QPainter painter(this);
 
     //Preparo el fondo
     painter.fillRect(15,15,672,462,QColor(255,255,255));
-    painter.drawText(20,33,"P(x)");
+    painter.drawText(20,33,"# Colores");
     painter.drawText(550,472,"x=valor del pixel");
 
-    //Eje X
+        //Eje X
     QLine xAxis(20,450,670,450);
     painter.drawLine(xAxis);
 
     //Eje Y
     QLine yAxis(110,470,110,20);
     painter.drawLine(yAxis);
-
     //Punto 1
     int x1=40;
-    int y1=450;
-
     //Punto 2
     int x2=670;
-    int y2=450;
-
+    int  y=450;
     //Largo X
-    int x_size=630;
-
+    //int  x_size=630;
     //Largo Y
     int y_size=450;
+
 
     //Factor de Separacion
     int space = 40;
 
     //Obtengo el maximo para escalar
-    float maximo = getAvgsMax();
-
+    this->getCount();
+    long maximo = getcounterMax();
+    //eso es una prueba
+    int maximoColor=image->getColorMax();
+    int minimoColor=image->getColorMin();
+    int media=image->getMedia();
+    painter.drawText(222,472,QString::number(maximoColor));
+    painter.drawText(111,472,QString::number(minimoColor));
+    painter.drawText(333,472,QString::number(media));
     //Factor de Escala
     float etiqEscala = ((float) maximo / (y_size / space));
     float factor = 0;
@@ -94,25 +108,26 @@ void DialogHistograma::paintEvent(QPaintEvent *)
     //Grafico los valores escala de x
     int color = 0;
     int i = 111;
-    while(color <= 255)
+   while(color <= 255)
     {
-        painter.drawText(i,y2+10,QString::number(color));
+        painter.drawText(i,y+10,QString::number(color));
         color+=15;
         i +=30;
     }
 
     //Grafico el Histograma
-    QPen pen(QColor(255,51,0));
+
+    QPen pen(QColor(100,100,255));
     painter.setPen(pen);
-
-
-
     int sep = 2;
     int j = 0;
     for(int i = 0; i < 256; i++)
     {
-        painter.drawLine(j+111,y2,j+111,450 - ( avgs[i] * 420 / maximo));
-        j +=2;
+        for(int x=0;x<sep;x++){
+            painter.drawLine(j+x+111,y,j+x+111,450 - ( counter[i] * 420 / maximo));
+
+        }
+         j +=sep;
     }
 }
 

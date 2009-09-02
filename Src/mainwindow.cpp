@@ -15,6 +15,8 @@
 #include "southwestfilter.h"
 #include "southeastfilter.h"
 #include "osteoporosisimage.h"
+#include "dialoghistograma.h"
+#include "tools.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -50,12 +52,25 @@ void MainWindow::initControls()
     connect(this->ui->tbSelectZone,SIGNAL(pressed()),this,SLOT(setAction_SelRegion()));
     connect(this->ui->tbSelectTWard,SIGNAL(pressed()),this,SLOT(setAction_SelTWard()));
     connect(this->ui->tbSelectCP,SIGNAL(pressed()),this,SLOT(setAction_SelCP()));
+    connect(this->ui->actionHistograma, SIGNAL(triggered()),this,SLOT(histogram()));
 }
 
 void MainWindow::north()
 {
     Filter* f= new NorthFilter();
     this->applyFilter("Filtro Norte",f);
+}
+
+void MainWindow::histogram(){
+ //   float * histograma;
+ //   histograma=getProbabilitiesDistribution(finalResult.toImage());
+ /*   DialogHistograma * dialog = new DialogHistograma;
+    OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
+    dialog->setImage(image);
+    dialog->exec();
+*/
+    Tools* dialog = new Tools(this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage(), this);
+    dialog->show();
 }
 
 void MainWindow::south()
@@ -164,7 +179,7 @@ void MainWindow::addUserSelection(OsteoporosisImage* selection)
 {
     QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
     QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-    selection->normalize();
+   // selection->normalize();
     this->addImagePage(selection, "Seleccion", "Region de interes", newElement);
 }
 
