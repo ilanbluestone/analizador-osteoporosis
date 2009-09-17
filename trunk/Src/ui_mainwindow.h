@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Tue Sep 1 16:31:00 2009
-**      by: Qt User Interface Compiler version 4.5.0
+** Created: Thu Sep 17 14:34:34 2009
+**      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -22,6 +22,7 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QPushButton>
 #include <QtGui/QStackedWidget>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
@@ -53,7 +54,15 @@ public:
     QAction *actionPrewitt;
     QAction *actionFrei_Chen;
     QAction *actionCompleto;
-    QAction *actionHistograma;
+    QAction *actionGaussiano;
+    QAction *actionDilatacion;
+    QAction *actionErosion;
+    QAction *actionErosi_n_condicional;
+    QAction *actionUmbralado;
+    QAction *actionNormalizaci_n;
+    QAction *actionUmbral;
+    QAction *actionNormalizacion;
+    QAction *actionEcualizacion;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QStackedWidget *stackedWidget;
@@ -66,8 +75,6 @@ public:
     QFormLayout *formLayout;
     QLabel *label_3;
     QToolButton *tbSelectZone;
-    QLabel *lbBordes;
-    QToolButton *tbDetectBorders;
     QLabel *label;
     QToolButton *tbSelectTWard;
     QLabel *label_4;
@@ -75,6 +82,9 @@ public:
     QLabel *label_5;
     QToolButton *tbDiagnosticate;
     QWidget *tabWidgetPage2;
+    QFormLayout *formLayout_2;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
     QTreeWidget *treeWidget;
     QMenuBar *menuBar;
     QMenu *menu_Archivo;
@@ -85,6 +95,8 @@ public:
     QMenu *menuRealce;
     QMenu *menuOtros;
     QMenu *menuHerramientas;
+    QMenu *menuHistograma;
+    QMenu *menuTransformaciones;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindowClass)
@@ -129,8 +141,24 @@ public:
         actionFrei_Chen->setObjectName(QString::fromUtf8("actionFrei_Chen"));
         actionCompleto = new QAction(MainWindowClass);
         actionCompleto->setObjectName(QString::fromUtf8("actionCompleto"));
-        actionHistograma = new QAction(MainWindowClass);
-        actionHistograma->setObjectName(QString::fromUtf8("actionHistograma"));
+        actionGaussiano = new QAction(MainWindowClass);
+        actionGaussiano->setObjectName(QString::fromUtf8("actionGaussiano"));
+        actionDilatacion = new QAction(MainWindowClass);
+        actionDilatacion->setObjectName(QString::fromUtf8("actionDilatacion"));
+        actionErosion = new QAction(MainWindowClass);
+        actionErosion->setObjectName(QString::fromUtf8("actionErosion"));
+        actionErosi_n_condicional = new QAction(MainWindowClass);
+        actionErosi_n_condicional->setObjectName(QString::fromUtf8("actionErosi_n_condicional"));
+        actionUmbralado = new QAction(MainWindowClass);
+        actionUmbralado->setObjectName(QString::fromUtf8("actionUmbralado"));
+        actionNormalizaci_n = new QAction(MainWindowClass);
+        actionNormalizaci_n->setObjectName(QString::fromUtf8("actionNormalizaci_n"));
+        actionUmbral = new QAction(MainWindowClass);
+        actionUmbral->setObjectName(QString::fromUtf8("actionUmbral"));
+        actionNormalizacion = new QAction(MainWindowClass);
+        actionNormalizacion->setObjectName(QString::fromUtf8("actionNormalizacion"));
+        actionEcualizacion = new QAction(MainWindowClass);
+        actionEcualizacion->setObjectName(QString::fromUtf8("actionEcualizacion"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -168,7 +196,7 @@ public:
         sizePolicy.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
         tabWidget->setSizePolicy(sizePolicy);
         tabWidget->setMinimumSize(QSize(240, 0));
-        tabWidget->setMaximumSize(QSize(16777215, 16777215));
+        tabWidget->setMaximumSize(QSize(16777215, 220));
         tabWidgetPage1 = new QWidget();
         tabWidgetPage1->setObjectName(QString::fromUtf8("tabWidgetPage1"));
         formLayout = new QFormLayout(tabWidgetPage1);
@@ -177,7 +205,7 @@ public:
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
         formLayout->setHorizontalSpacing(9);
-        formLayout->setVerticalSpacing(6);
+        formLayout->setVerticalSpacing(14);
         label_3 = new QLabel(tabWidgetPage1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
@@ -188,49 +216,54 @@ public:
 
         formLayout->setWidget(1, QFormLayout::FieldRole, tbSelectZone);
 
-        lbBordes = new QLabel(tabWidgetPage1);
-        lbBordes->setObjectName(QString::fromUtf8("lbBordes"));
-
-        formLayout->setWidget(2, QFormLayout::LabelRole, lbBordes);
-
-        tbDetectBorders = new QToolButton(tabWidgetPage1);
-        tbDetectBorders->setObjectName(QString::fromUtf8("tbDetectBorders"));
-
-        formLayout->setWidget(2, QFormLayout::FieldRole, tbDetectBorders);
-
         label = new QLabel(tabWidgetPage1);
         label->setObjectName(QString::fromUtf8("label"));
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, label);
+        formLayout->setWidget(2, QFormLayout::LabelRole, label);
 
         tbSelectTWard = new QToolButton(tabWidgetPage1);
         tbSelectTWard->setObjectName(QString::fromUtf8("tbSelectTWard"));
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, tbSelectTWard);
+        formLayout->setWidget(2, QFormLayout::FieldRole, tbSelectTWard);
 
         label_4 = new QLabel(tabWidgetPage1);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, label_4);
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_4);
 
         tbSelectCP = new QToolButton(tabWidgetPage1);
         tbSelectCP->setObjectName(QString::fromUtf8("tbSelectCP"));
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, tbSelectCP);
+        formLayout->setWidget(3, QFormLayout::FieldRole, tbSelectCP);
 
         label_5 = new QLabel(tabWidgetPage1);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, label_5);
+        formLayout->setWidget(4, QFormLayout::LabelRole, label_5);
 
         tbDiagnosticate = new QToolButton(tabWidgetPage1);
         tbDiagnosticate->setObjectName(QString::fromUtf8("tbDiagnosticate"));
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, tbDiagnosticate);
+        formLayout->setWidget(4, QFormLayout::FieldRole, tbDiagnosticate);
 
         tabWidget->addTab(tabWidgetPage1, QString());
         tabWidgetPage2 = new QWidget();
         tabWidgetPage2->setObjectName(QString::fromUtf8("tabWidgetPage2"));
+        formLayout_2 = new QFormLayout(tabWidgetPage2);
+        formLayout_2->setSpacing(6);
+        formLayout_2->setMargin(11);
+        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
+        formLayout_2->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
+        pushButton = new QPushButton(tabWidgetPage2);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        formLayout_2->setWidget(0, QFormLayout::SpanningRole, pushButton);
+
+        pushButton_2 = new QPushButton(tabWidgetPage2);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        formLayout_2->setWidget(1, QFormLayout::SpanningRole, pushButton_2);
+
         tabWidget->addTab(tabWidgetPage2, QString());
 
         verticalLayout_2->addWidget(tabWidget);
@@ -245,7 +278,8 @@ public:
         treeWidget->setRootIsDecorated(true);
         treeWidget->setItemsExpandable(true);
         treeWidget->setAnimated(true);
-        treeWidget->header()->setVisible(true);
+        treeWidget->setColumnCount(1);
+        treeWidget->header()->setVisible(false);
 
         verticalLayout_2->addWidget(treeWidget);
 
@@ -255,7 +289,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 29));
+        menuBar->setGeometry(QRect(0, 0, 800, 25));
         menu_Archivo = new QMenu(menuBar);
         menu_Archivo->setObjectName(QString::fromUtf8("menu_Archivo"));
         menuFiltros = new QMenu(menuBar);
@@ -272,27 +306,31 @@ public:
         menuOtros->setObjectName(QString::fromUtf8("menuOtros"));
         menuHerramientas = new QMenu(menuBar);
         menuHerramientas->setObjectName(QString::fromUtf8("menuHerramientas"));
+        menuHistograma = new QMenu(menuHerramientas);
+        menuHistograma->setObjectName(QString::fromUtf8("menuHistograma"));
+        menuTransformaciones = new QMenu(menuBar);
+        menuTransformaciones->setObjectName(QString::fromUtf8("menuTransformaciones"));
         MainWindowClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindowClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindowClass->setStatusBar(statusBar);
         QWidget::setTabOrder(tabWidget, tbSelectZone);
-        QWidget::setTabOrder(tbSelectZone, tbDetectBorders);
-        QWidget::setTabOrder(tbDetectBorders, tbSelectTWard);
+        QWidget::setTabOrder(tbSelectZone, tbSelectTWard);
         QWidget::setTabOrder(tbSelectTWard, tbSelectCP);
         QWidget::setTabOrder(tbSelectCP, tbDiagnosticate);
         QWidget::setTabOrder(tbDiagnosticate, treeWidget);
 
         menuBar->addAction(menu_Archivo->menuAction());
         menuBar->addAction(menuFiltros->menuAction());
+        menuBar->addAction(menuTransformaciones->menuAction());
         menuBar->addAction(menuHerramientas->menuAction());
         menu_Archivo->addAction(actionAbrir_imagen);
         menu_Archivo->addAction(actionGuardar_resultados);
         menu_Archivo->addSeparator();
         menu_Archivo->addAction(actionSalir);
         menuFiltros->addAction(menuRealce->menuAction());
-        menuFiltros->addAction(menuDeteccion_de_bordes->menuAction());
         menuFiltros->addAction(menuOtros->menuAction());
+        menuFiltros->addAction(menuDeteccion_de_bordes->menuAction());
         menuDeteccion_de_bordes->addAction(menuDireccionales->menuAction());
         menuDeteccion_de_bordes->addAction(menuBasadas_en_gradiente->menuAction());
         menuDireccionales->addAction(actionEste);
@@ -303,14 +341,20 @@ public:
         menuDireccionales->addAction(actionSureste);
         menuDireccionales->addAction(actionNoroeste);
         menuDireccionales->addAction(actionNoreste);
-        menuBasadas_en_gradiente->addSeparator();
         menuBasadas_en_gradiente->addAction(actionRoberts);
         menuBasadas_en_gradiente->addAction(actionSobel);
         menuBasadas_en_gradiente->addAction(actionPrewitt);
         menuBasadas_en_gradiente->addAction(actionFrei_Chen);
         menuRealce->addAction(actionPaso_Alto);
         menuOtros->addAction(actionPaso_Bajo);
-        menuHerramientas->addAction(actionHistograma);
+        menuOtros->addAction(actionGaussiano);
+        menuHerramientas->addAction(menuHistograma->menuAction());
+        menuHistograma->addAction(actionUmbral);
+        menuHistograma->addAction(actionNormalizacion);
+        menuHistograma->addAction(actionEcualizacion);
+        menuTransformaciones->addAction(actionDilatacion);
+        menuTransformaciones->addAction(actionErosion);
+        menuTransformaciones->addAction(actionErosi_n_condicional);
 
         retranslateUi(MainWindowClass);
 
@@ -347,12 +391,18 @@ public:
         actionPrewitt->setText(QApplication::translate("MainWindowClass", "Prewitt", 0, QApplication::UnicodeUTF8));
         actionFrei_Chen->setText(QApplication::translate("MainWindowClass", "Frei-Chen", 0, QApplication::UnicodeUTF8));
         actionCompleto->setText(QApplication::translate("MainWindowClass", "Completo", 0, QApplication::UnicodeUTF8));
-        actionHistograma->setText(QApplication::translate("MainWindowClass", "Histograma", 0, QApplication::UnicodeUTF8));
+        actionGaussiano->setText(QApplication::translate("MainWindowClass", "Gaussiano", 0, QApplication::UnicodeUTF8));
+        actionDilatacion->setText(QApplication::translate("MainWindowClass", "Dilataci\303\263n", 0, QApplication::UnicodeUTF8));
+        actionErosion->setText(QApplication::translate("MainWindowClass", "Erosi\303\263n", 0, QApplication::UnicodeUTF8));
+        actionErosi_n_condicional->setText(QApplication::translate("MainWindowClass", "Erosi\303\263n condicional", 0, QApplication::UnicodeUTF8));
+        actionUmbralado->setText(QApplication::translate("MainWindowClass", "Umbralado", 0, QApplication::UnicodeUTF8));
+        actionNormalizaci_n->setText(QApplication::translate("MainWindowClass", "Normalizaci\303\263n", 0, QApplication::UnicodeUTF8));
+        actionUmbral->setText(QApplication::translate("MainWindowClass", "Umbralado", 0, QApplication::UnicodeUTF8));
+        actionNormalizacion->setText(QApplication::translate("MainWindowClass", "Normalizaci\303\263n", 0, QApplication::UnicodeUTF8));
+        actionEcualizacion->setText(QApplication::translate("MainWindowClass", "Ecualizaci\303\263n", 0, QApplication::UnicodeUTF8));
         stackedWidget->setStyleSheet(QString());
         label_3->setText(QApplication::translate("MainWindowClass", "Seleccionar \303\241rea de Inter\303\251s:", 0, QApplication::UnicodeUTF8));
         tbSelectZone->setText(QApplication::translate("MainWindowClass", "...", 0, QApplication::UnicodeUTF8));
-        lbBordes->setText(QApplication::translate("MainWindowClass", "Detectar bordes:", 0, QApplication::UnicodeUTF8));
-        tbDetectBorders->setText(QApplication::translate("MainWindowClass", "...", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindowClass", "Marcar Tri\303\241ngulo de Ward:", 0, QApplication::UnicodeUTF8));
         tbSelectTWard->setText(QApplication::translate("MainWindowClass", "...", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindowClass", "Marcar Compresivo Principal:", 0, QApplication::UnicodeUTF8));
@@ -360,18 +410,21 @@ public:
         label_5->setText(QApplication::translate("MainWindowClass", "Determinar diagn\303\263stico:", 0, QApplication::UnicodeUTF8));
         tbDiagnosticate->setText(QApplication::translate("MainWindowClass", "...", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tabWidgetPage1), QApplication::translate("MainWindowClass", "Manual", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("MainWindowClass", "PushButton", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("MainWindowClass", "PushButton", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tabWidgetPage2), QApplication::translate("MainWindowClass", "Autom\303\241tico", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
-        ___qtreewidgetitem->setText(1, QApplication::translate("MainWindowClass", "Descripci\303\263n", 0, QApplication::UnicodeUTF8));
-        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindowClass", "Imagen", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem->setText(0, QApplication::translate("MainWindowClass", "Im\303\241genes", 0, QApplication::UnicodeUTF8));
         menu_Archivo->setTitle(QApplication::translate("MainWindowClass", "&Archivo", 0, QApplication::UnicodeUTF8));
         menuFiltros->setTitle(QApplication::translate("MainWindowClass", "Filtros", 0, QApplication::UnicodeUTF8));
         menuDeteccion_de_bordes->setTitle(QApplication::translate("MainWindowClass", "Deteccion de bordes", 0, QApplication::UnicodeUTF8));
         menuDireccionales->setTitle(QApplication::translate("MainWindowClass", "Direccionales", 0, QApplication::UnicodeUTF8));
         menuBasadas_en_gradiente->setTitle(QApplication::translate("MainWindowClass", "Basadas en gradiente", 0, QApplication::UnicodeUTF8));
         menuRealce->setTitle(QApplication::translate("MainWindowClass", "Realce", 0, QApplication::UnicodeUTF8));
-        menuOtros->setTitle(QApplication::translate("MainWindowClass", "Otros", 0, QApplication::UnicodeUTF8));
+        menuOtros->setTitle(QApplication::translate("MainWindowClass", "Suavizado", 0, QApplication::UnicodeUTF8));
         menuHerramientas->setTitle(QApplication::translate("MainWindowClass", "Herramientas", 0, QApplication::UnicodeUTF8));
+        menuHistograma->setTitle(QApplication::translate("MainWindowClass", "Histograma", 0, QApplication::UnicodeUTF8));
+        menuTransformaciones->setTitle(QApplication::translate("MainWindowClass", "Transformaciones", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

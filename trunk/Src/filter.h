@@ -10,10 +10,13 @@
 class Filter : public Transformation
 {
 private:
+
+
     int getPonderation(int i, int j,OsteoporosisImage* image,int minc, int maxc, int media);
 
+
 protected:
-    int max, min, minc, maxc;
+    int max, min;
     QVector <Matrix *> mask;
     Matrix* getPonderationMatrix(OsteoporosisImage* );
     class OsteoporosisImage* normalize(Matrix* values);

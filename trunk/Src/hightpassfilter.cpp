@@ -12,7 +12,6 @@ HightPassFilter::HightPassFilter()
     mask.push_back(matrix);
 }
 
-/*
 OsteoporosisImage* HightPassFilter::apply(OsteoporosisImage* image)
 {
     OsteoporosisImage* filteredImage;
@@ -57,7 +56,7 @@ int HightPassFilter::getPonderation(int i, int j, OsteoporosisImage* image,int m
 
 
 
-*/
+
 
 HightPassFilter::~HightPassFilter()
 {

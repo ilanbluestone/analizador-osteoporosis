@@ -14,9 +14,14 @@
 #include "westfilter.h"
 #include "southwestfilter.h"
 #include "southeastfilter.h"
+#include "gaussianofilter.h"
 #include "osteoporosisimage.h"
 #include "dialoghistograma.h"
 #include "tools.h"
+#include "erosion.h"
+#include "conditionalerosion.h"
+#include "dilatation.h"
+#include "rosenfiled_kack.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -34,7 +39,6 @@ void MainWindow::initControls()
     connect(this->ui->actionAbrir_imagen,SIGNAL(triggered()),this,SLOT(openImage()));
     connect(this->ui->actionGuardar_resultados,SIGNAL(triggered()),this,SLOT(saveResult()));
     connect(this->ui->actionSalir,SIGNAL(triggered()),this,SLOT(close()));
-    connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
     connect(this->ui->actionPaso_Alto,SIGNAL(triggered()),this,SLOT(hightpass()));
     connect(this->ui->actionPaso_Bajo,SIGNAL(triggered()),this,SLOT(lowpass()));
     connect(this->ui->actionNoroeste,SIGNAL(triggered()),this,SLOT(northWest()));
@@ -47,12 +51,16 @@ void MainWindow::initControls()
     connect(this->ui->actionOeste,SIGNAL(triggered()),this,SLOT(west()));
     connect(this->ui->actionPrewitt,SIGNAL(triggered()),this,SLOT(prewitt()));
     connect(this->ui->actionSobel,SIGNAL(triggered()),this,SLOT(sobel()));
+    connect(this->ui->actionGaussiano,SIGNAL(triggered()),this,SLOT(gaussiano()));
+    connect(this->ui->actionErosion,SIGNAL(triggered()),this,SLOT(erosion()));
+    connect(this->ui->actionErosi_n_condicional,SIGNAL(triggered()),this,SLOT(erosionCond()));
+    connect(this->ui->actionDilatacion,SIGNAL(triggered()),this,SLOT(dilatation()));
     connect(this->ui->actionRoberts,SIGNAL(triggered()),this,SLOT(roberts()));
     connect(this->ui->actionFrei_Chen,SIGNAL(triggered()),this,SLOT(frei_chen()));
     connect(this->ui->tbSelectZone,SIGNAL(pressed()),this,SLOT(setAction_SelRegion()));
     connect(this->ui->tbSelectTWard,SIGNAL(pressed()),this,SLOT(setAction_SelTWard()));
     connect(this->ui->tbSelectCP,SIGNAL(pressed()),this,SLOT(setAction_SelCP()));
-    connect(this->ui->actionHistograma, SIGNAL(triggered()),this,SLOT(histogram()));
+    connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
 }
 
 void MainWindow::north()
@@ -61,15 +69,8 @@ void MainWindow::north()
     this->applyFilter("Filtro Norte",f);
 }
 
-void MainWindow::histogram(){
- //   float * histograma;
- //   histograma=getProbabilitiesDistribution(finalResult.toImage());
- /*   DialogHistograma * dialog = new DialogHistograma;
-    OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
-    dialog->setImage(image);
-    dialog->exec();
-*/
-    Tools* dialog = new Tools(this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage(), this);
+void MainWindow::tools(int tool){
+    Tools* dialog = new Tools(this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage(),tool, this);
     dialog->show();
 }
 
@@ -139,6 +140,12 @@ void MainWindow::lowpass()
     this->applyFilter("Filtro Paso Bajo",f);
 }
 
+void MainWindow::gaussiano()
+{
+    Filter* f= new GaussianoFilter();
+    this->applyFilter("Filtro Gaussiano",f);
+}
+
 void MainWindow::frei_chen()
 {
     Filter* f= new Frei_ChenFilter();
@@ -151,27 +158,62 @@ void MainWindow::roberts()
     this->applyFilter("Filtro Roberts",f);
 }
 
+void MainWindow::erosion()
+{
+    Transformation* t= new Erosion();
+    this->applyTransformation("Erosion",t);
+}
+
+void MainWindow::erosionCond()
+{
+    Transformation* t= new ConditionalErosion();
+    this->applyTransformation("Erosion",t);
+}
+
+void MainWindow::dilatation()
+{
+    Transformation* t= new Dilatation();
+    this->applyTransformation("Dilatación",t);
+}
+
 void MainWindow::saveResult()
 {
+    int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
+    OsteoporosisImage* image = this->imagePages.at(position)->getImage();
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Guardar imagen..."),tr("/home"),tr("Imágenes (*.png *.bmp *.jpg)"));
+    image->saveAs(fileName);
 }
 
 void MainWindow::applyFilter (QString name,Filter* f)
 {
-    QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
-    QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-    OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
-    OsteoporosisImage* newImage = image->transform(f);
-    this->addImagePage(newImage, name, "Imagen con filtro aplicado", newElement);
+    if (!this->imagePages.empty()){
+        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
+        OsteoporosisImage* newImage = image->transform(f);
+        this->addImagePage(newImage, name, newElement);
+    }
+}
+
+void MainWindow::applyTransformation (QString name, Transformation* t)
+{
+    if (!this->imagePages.empty()){
+        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
+        OsteoporosisImage* newImage = image->transform(t);
+        this->addImagePage(newImage, name, newElement);
+    }
 }
 
 void MainWindow::openImage()
 {
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Abrir imagen..."),"/home",tr("Images (*.png *.bmp *.jpg)"));
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Abrir imagen..."),tr("/home"),tr("Imágenes (*.png *.bmp *.jpg)"));
     if (!fileName.isEmpty()){
         OsteoporosisImage* image = new OsteoporosisImage(fileName);
         QIcon* icon = new QIcon(fileName);
         QTreeWidgetItem* treeElement = new QTreeWidgetItem(this->ui->treeWidget);
-        this->addImagePage(image, fileName, "Versión original de la imagen", treeElement, icon);
+        this->addImagePage(image, fileName, treeElement, icon);
     }
 }
 
@@ -179,11 +221,17 @@ void MainWindow::addUserSelection(OsteoporosisImage* selection)
 {
     QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
     QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-   // selection->normalize();
-    this->addImagePage(selection, "Seleccion", "Region de interes", newElement);
+    this->addImagePage(selection,"Recorte", newElement);
 }
 
-void MainWindow::addImagePage(OsteoporosisImage *image, QString name, QString description, QTreeWidgetItem* treeElement, QIcon* icon)
+void MainWindow::addModifiedImage(OsteoporosisImage* image, QString name)
+{
+    QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+    QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+    this->addImagePage(image, name, newElement);
+}
+
+void MainWindow::addImagePage(OsteoporosisImage *image, QString name, QTreeWidgetItem* treeElement, QIcon* icon)
 {
     QScrollArea* scrollArea = new QScrollArea(this->ui->stackedWidget);
     QImagePage* page = new QImagePage(image,this,scrollArea);
@@ -192,9 +240,8 @@ void MainWindow::addImagePage(OsteoporosisImage *image, QString name, QString de
     this->ui->stackedWidget->addWidget(scrollArea);
     this->ui->stackedWidget->setCurrentWidget(scrollArea);
     this->pageLinks.push_back(treeElement);
-    treeElement->setText(0,name);
+    treeElement->setText(0,QString().fromLocal8Bit(name.toLatin1().data()));
     if (icon) treeElement->setIcon(0,*icon);
-    treeElement->setText(1,QString().fromLocal8Bit(description.toLatin1().data()));
     this->ui->treeWidget->setCurrentItem(treeElement);
 }
 
@@ -215,7 +262,6 @@ void MainWindow::setAction_SelRegion()
 
 void MainWindow::setAction_SelTWard()
 {
-
 }
 
 void MainWindow::setAction_SelCP()
@@ -228,3 +274,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_tbDiagnosticate_clicked()
+{
+}
+
+void MainWindow::on_actionUmbral_triggered()
+{
+    this->tools(0);
+}
+
+void MainWindow::on_actionNormalizacion_triggered()
+{
+    this->tools(1);
+}
+
+void MainWindow::on_actionEcualizacion_triggered()
+{
+    this->tools(3);
+}

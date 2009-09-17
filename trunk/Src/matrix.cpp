@@ -13,7 +13,7 @@ Matrix::Matrix(int rows, int columns)
     }
 }
 
-float Matrix::at(int r, int c)
+int Matrix::at(int r, int c)
 {
    return this->values[r][c];
 }

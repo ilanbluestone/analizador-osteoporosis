@@ -1,6 +1,5 @@
 #ifndef LOWPASSFILTER_H
 #define LOWPASSFILTER_H
-
 #include "filter.h"
 
 class LowPassFilter : public Filter
