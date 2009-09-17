@@ -10,7 +10,7 @@ private:
 
 public:
     Matrix(int rows, int columns);
-    float at(int r, int c);
+    int at(int r, int c);
     void set(int r, int c, float value);
     int getRows();
     int getColumns();
