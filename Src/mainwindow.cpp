@@ -22,6 +22,7 @@
 #include "conditionalerosion.h"
 #include "dilatation.h"
 #include "rosenfiled_kack.h"
+#include "hilditch.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -54,6 +55,7 @@ void MainWindow::initControls()
     connect(this->ui->actionGaussiano,SIGNAL(triggered()),this,SLOT(gaussiano()));
     connect(this->ui->actionErosion,SIGNAL(triggered()),this,SLOT(erosion()));
     connect(this->ui->actionErosi_n_condicional,SIGNAL(triggered()),this,SLOT(erosionCond()));
+    connect(this->ui->actionEsqueletizacion,SIGNAL(triggered()),this,SLOT(skeleton()));
     connect(this->ui->actionDilatacion,SIGNAL(triggered()),this,SLOT(dilatation()));
     connect(this->ui->actionRoberts,SIGNAL(triggered()),this,SLOT(roberts()));
     connect(this->ui->actionFrei_Chen,SIGNAL(triggered()),this,SLOT(frei_chen()));
@@ -170,6 +172,12 @@ void MainWindow::erosionCond()
     this->applyTransformation("Erosion",t);
 }
 
+void MainWindow::skeleton()
+{
+    Transformation* t= new Hilditch();//new Rosenfiled_Kack(4);
+    this->applyTransformation("Esqueleto",t);
+}
+
 void MainWindow::dilatation()
 {
     Transformation* t= new Dilatation();
@@ -181,7 +189,7 @@ void MainWindow::saveResult()
     int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
     OsteoporosisImage* image = this->imagePages.at(position)->getImage();
     QString fileName = QFileDialog::getSaveFileName(this,tr("Guardar imagen..."),tr("/home"),tr("Imágenes (*.png *.bmp *.jpg)"));
-    image->saveAs(fileName);
+    if (!fileName.isEmpty()) image->saveAs(fileName);
 }
 
 void MainWindow::applyFilter (QString name,Filter* f)
@@ -262,11 +270,20 @@ void MainWindow::setAction_SelRegion()
 
 void MainWindow::setAction_SelTWard()
 {
+    int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
+    if (position != -1){
+        QImagePage* page = this->imagePages.at(position);
+        page->setAction(SEL_TWARD);
+    }
 }
 
 void MainWindow::setAction_SelCP()
 {
-
+    int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
+    if (position != -1){
+        QImagePage* page = this->imagePages.at(position);
+        page->setAction(SEL_CP);
+    }
 }
 
 MainWindow::~MainWindow()

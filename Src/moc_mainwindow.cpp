@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Sep 17 14:56:01 2009
+** Created: Fri Oct 16 18:05:54 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      31,   12, // methods
+      32,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,6 +60,7 @@ static const uint qt_meta_data_MainWindow[] = {
      509,   11,   11,   11, 0x08,
      519,   11,   11,   11, 0x08,
      533,   11,   11,   11, 0x08,
+     546,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -80,7 +81,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "sobel()\0prewitt()\0hightpass()\0lowpass()\0"
     "gaussiano()\0roberts()\0frei_chen()\0"
     "tool\0tools(int)\0erosion()\0erosionCond()\0"
-    "dilatation()\0"
+    "dilatation()\0skeleton()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -139,9 +140,10 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 28: erosion(); break;
         case 29: erosionCond(); break;
         case 30: dilatation(); break;
+        case 31: skeleton(); break;
         default: ;
         }
-        _id -= 31;
+        _id -= 32;
     }
     return _id;
 }

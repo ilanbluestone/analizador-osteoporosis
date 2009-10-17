@@ -17,7 +17,7 @@ OsteoporosisImage* ConditionalErosion::apply(OsteoporosisImage* image)
                 for (int c = -1; c < 2; c++)
                     if (image->getColorAt(x+c,y+f) < min)
                         min = image->getColorAt(x+c,y+f);
-            if ((min != image->getColorAt(x,y)) && (!condition(x,y,image)))
+            if ((min != image->getColorAt(x,y)) && (condition(x,y,image)))
                 resul->setColorAt(x,y,min);
             else
                 resul->setColorAt(x,y,image->getColorAt(x,y));

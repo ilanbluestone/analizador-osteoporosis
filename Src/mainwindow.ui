@@ -315,6 +315,8 @@
     <addaction name="actionDilatacion"/>
     <addaction name="actionErosion"/>
     <addaction name="actionErosi_n_condicional"/>
+    <addaction name="separator"/>
+    <addaction name="actionEsqueletizacion"/>
    </widget>
    <addaction name="menu_Archivo"/>
    <addaction name="menuFiltros"/>
@@ -467,6 +469,11 @@
   <action name="actionEcualizacion">
    <property name="text">
     <string>Ecualización</string>
+   </property>
+  </action>
+  <action name="actionEsqueletizacion">
+   <property name="text">
+    <string>Esqueletizacion</string>
    </property>
   </action>
  </widget>
