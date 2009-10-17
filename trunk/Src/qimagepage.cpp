@@ -71,7 +71,7 @@ void QImagePage::mouseMoveEvent(QMouseEvent* event)
     update();
 }
 
-void QImagePage::mouseReleaseEvent(QMouseEvent* event)
+void QImagePage::mouseReleaseEvent(QMouseEvent* )
 {
     switch (this->currentAction)
     {

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Thu Sep 17 14:55:23 2009
+** Created: Sat Oct 10 11:35:11 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -63,6 +63,7 @@ public:
     QAction *actionUmbral;
     QAction *actionNormalizacion;
     QAction *actionEcualizacion;
+    QAction *actionEsqueletizacion;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QStackedWidget *stackedWidget;
@@ -159,6 +160,8 @@ public:
         actionNormalizacion->setObjectName(QString::fromUtf8("actionNormalizacion"));
         actionEcualizacion = new QAction(MainWindowClass);
         actionEcualizacion->setObjectName(QString::fromUtf8("actionEcualizacion"));
+        actionEsqueletizacion = new QAction(MainWindowClass);
+        actionEsqueletizacion->setObjectName(QString::fromUtf8("actionEsqueletizacion"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -355,6 +358,8 @@ public:
         menuTransformaciones->addAction(actionDilatacion);
         menuTransformaciones->addAction(actionErosion);
         menuTransformaciones->addAction(actionErosi_n_condicional);
+        menuTransformaciones->addSeparator();
+        menuTransformaciones->addAction(actionEsqueletizacion);
 
         retranslateUi(MainWindowClass);
 
@@ -400,6 +405,7 @@ public:
         actionUmbral->setText(QApplication::translate("MainWindowClass", "Umbralado", 0, QApplication::UnicodeUTF8));
         actionNormalizacion->setText(QApplication::translate("MainWindowClass", "Normalizaci\303\263n", 0, QApplication::UnicodeUTF8));
         actionEcualizacion->setText(QApplication::translate("MainWindowClass", "Ecualizaci\303\263n", 0, QApplication::UnicodeUTF8));
+        actionEsqueletizacion->setText(QApplication::translate("MainWindowClass", "Esqueletizacion", 0, QApplication::UnicodeUTF8));
         stackedWidget->setStyleSheet(QString());
         label_3->setText(QApplication::translate("MainWindowClass", "Seleccionar \303\241rea de Inter\303\251s:", 0, QApplication::UnicodeUTF8));
         tbSelectZone->setText(QApplication::translate("MainWindowClass", "...", 0, QApplication::UnicodeUTF8));

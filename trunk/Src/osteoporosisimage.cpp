@@ -102,8 +102,12 @@ QRgb OsteoporosisImage::getPixelColorAt(int x, int y)
 
 int OsteoporosisImage::getColorAt(int x, int y)
 {
-    QColor c=this->image->pixel(x,y);
-    return qGray(c.rgb());
+    if ((x >= 0) && (x < this->getWidth()) && (y >= 0) && (y < this->getHeight()))
+    {
+        QColor c=this->image->pixel(x,y);
+        return qGray(c.rgb());
+    }
+    return -100;
 }
 
 void OsteoporosisImage::setPixelColorAt(int x, int y, QRgb color)
