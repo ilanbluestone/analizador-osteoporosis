@@ -67,6 +67,7 @@ private slots:
     void erosionCond();
     void dilatation();
     void skeleton();
+    void ward();
 };
 
 #endif // MAINWINDOW_H

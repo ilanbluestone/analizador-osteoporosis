@@ -245,3 +245,8 @@ int OsteoporosisImage::getMedia()
     }
     return i-1;
 }
+
+void OsteoporosisImage::fill(int color)
+{
+    this->image->fill(qRgb(color,color,color));
+}
