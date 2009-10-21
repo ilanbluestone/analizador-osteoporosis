@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Sat Oct 10 11:35:11 2009
+** Created: Wed Oct 21 12:56:02 2009
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -64,6 +64,7 @@ public:
     QAction *actionNormalizacion;
     QAction *actionEcualizacion;
     QAction *actionEsqueletizacion;
+    QAction *actionBuscar_Ward;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QStackedWidget *stackedWidget;
@@ -162,6 +163,8 @@ public:
         actionEcualizacion->setObjectName(QString::fromUtf8("actionEcualizacion"));
         actionEsqueletizacion = new QAction(MainWindowClass);
         actionEsqueletizacion->setObjectName(QString::fromUtf8("actionEsqueletizacion"));
+        actionBuscar_Ward = new QAction(MainWindowClass);
+        actionBuscar_Ward->setObjectName(QString::fromUtf8("actionBuscar_Ward"));
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -292,7 +295,7 @@ public:
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 800, 25));
+        menuBar->setGeometry(QRect(0, 0, 800, 29));
         menu_Archivo = new QMenu(menuBar);
         menu_Archivo->setObjectName(QString::fromUtf8("menu_Archivo"));
         menuFiltros = new QMenu(menuBar);
@@ -360,6 +363,8 @@ public:
         menuTransformaciones->addAction(actionErosi_n_condicional);
         menuTransformaciones->addSeparator();
         menuTransformaciones->addAction(actionEsqueletizacion);
+        menuTransformaciones->addSeparator();
+        menuTransformaciones->addAction(actionBuscar_Ward);
 
         retranslateUi(MainWindowClass);
 
@@ -406,6 +411,7 @@ public:
         actionNormalizacion->setText(QApplication::translate("MainWindowClass", "Normalizaci\303\263n", 0, QApplication::UnicodeUTF8));
         actionEcualizacion->setText(QApplication::translate("MainWindowClass", "Ecualizaci\303\263n", 0, QApplication::UnicodeUTF8));
         actionEsqueletizacion->setText(QApplication::translate("MainWindowClass", "Esqueletizacion", 0, QApplication::UnicodeUTF8));
+        actionBuscar_Ward->setText(QApplication::translate("MainWindowClass", "Buscar Ward", 0, QApplication::UnicodeUTF8));
         stackedWidget->setStyleSheet(QString());
         label_3->setText(QApplication::translate("MainWindowClass", "Seleccionar \303\241rea de Inter\303\251s:", 0, QApplication::UnicodeUTF8));
         tbSelectZone->setText(QApplication::translate("MainWindowClass", "...", 0, QApplication::UnicodeUTF8));

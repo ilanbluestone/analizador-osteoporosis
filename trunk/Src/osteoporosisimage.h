@@ -43,7 +43,7 @@ public:
     long* getHistogram();
     OsteoporosisImage* normalize(int, int);
     int* normalize(long* counter);
-
+    void fill(int color);
 };
 
 #endif // OSTEOPOROSISIMAGE_H

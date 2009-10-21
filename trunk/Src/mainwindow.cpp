@@ -23,6 +23,8 @@
 #include "dilatation.h"
 #include "rosenfiled_kack.h"
 #include "hilditch.h"
+#include "median.h"
+#include "wardfinder.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -62,18 +64,36 @@ void MainWindow::initControls()
     connect(this->ui->tbSelectZone,SIGNAL(pressed()),this,SLOT(setAction_SelRegion()));
     connect(this->ui->tbSelectTWard,SIGNAL(pressed()),this,SLOT(setAction_SelTWard()));
     connect(this->ui->tbSelectCP,SIGNAL(pressed()),this,SLOT(setAction_SelCP()));
+    connect(this->ui->actionBuscar_Ward,SIGNAL(triggered()),this,SLOT(ward()));
     connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
 }
 
 void MainWindow::north()
 {
-    Filter* f= new NorthFilter();
-    this->applyFilter("Filtro Norte",f);
+    Filter* f= new Median();
+    this->applyFilter("Frei chen del 8",f);
+
+    //Filter* f= new NorthFilter();
+    //this->applyFilter("Filtro Norte",f);
 }
 
 void MainWindow::tools(int tool){
     Tools* dialog = new Tools(this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage(),tool, this);
     dialog->show();
+}
+
+void MainWindow::ward()
+{
+    if (!this->imagePages.empty()){
+        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
+        WardFinder* w= new WardFinder();
+        w->findPaths(image);
+        OsteoporosisImage* newImage = w->getPaths();
+        this->addImagePage(newImage, "caminos", newElement);
+    }
+
 }
 
 void MainWindow::south()
