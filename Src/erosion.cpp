@@ -6,7 +6,7 @@ Erosion::Erosion()
 
 OsteoporosisImage* Erosion::apply(OsteoporosisImage* image)
 {
-    OsteoporosisImage* resul = new OsteoporosisImage(image->getSize());
+    OsteoporosisImage* resul = image->clone();
     int min;
 
     for (int x = 1; x < image->getWidth()-1; x++)

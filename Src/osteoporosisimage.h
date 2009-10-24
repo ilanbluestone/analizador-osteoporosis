@@ -11,7 +11,6 @@ private:
     QImage* image;
     QString imagePath;
 
-    void setImage(QImage* image);
     void setImagePath(QString path);
 
 public:
@@ -21,6 +20,7 @@ public:
     void copyFrom(OsteoporosisImage* image);
     void setPixelColorAt(int x, int y, QRgb color);
     void setColorAt(int x, int y, int color);
+    void setImage(QImage* image);
     int getWidth();
     int getHeight();
     int getColorAt(int x, int y);
