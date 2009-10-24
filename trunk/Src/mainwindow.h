@@ -67,6 +67,7 @@ private slots:
     void erosionCond();
     void dilatation();
     void skeleton();
+    void noise();
     void ward();
 };
 
