@@ -70,8 +70,8 @@ void MainWindow::initControls()
 
 void MainWindow::north()
 {
-    Filter* f= new Median();
-    this->applyFilter("Frei chen del 8",f);
+    Filter* f= new MedianFilter();
+    this->applyFilter("mediana",f);
 
     //Filter* f= new NorthFilter();
     //this->applyFilter("Filtro Norte",f);
