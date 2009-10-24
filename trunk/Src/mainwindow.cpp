@@ -92,6 +92,7 @@ void MainWindow::ward()
         OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
         WardFinder* w= new WardFinder();
         w->findPaths(image);
+        w->findPoints();
         OsteoporosisImage* newImage = w->getPaths();
         this->addImagePage(newImage, "caminos", newElement);
     }

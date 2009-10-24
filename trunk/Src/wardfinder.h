@@ -9,14 +9,23 @@ class WardFinder
 {
 private:
     OsteoporosisImage* paths;
+    QList<QPoint>* path1, *path2;
+    QPoint starterPoint1, starterPoint2;
+    QPoint criticPoint;                 // punto en el que comienza la base del triangulo
+    QLine minimumDistance;
+    QPolygon wardTriangle;
+    QPoint centerPoint;                 // punto centrado en el triangulo
+    QLine edge;
 
-    void checkOff(int x, int y, OsteoporosisImage* image, bool* path);
+    void checkOff(int x, int y, OsteoporosisImage* image, bool* path, QList<QPoint>* list);
     QList<QPoint> neighbords(int x, int y, OsteoporosisImage* image);
 
 public:
     WardFinder();
 
     void findPaths(OsteoporosisImage* image);
+    void findPoints();
+    QRect* findWardTraingle(int n);          // devuelve un cuadrado de nxn centrado en el triangulo
     OsteoporosisImage* getPaths();
 
 };

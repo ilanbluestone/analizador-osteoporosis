@@ -6,7 +6,7 @@ Dilatation::Dilatation()
 
 OsteoporosisImage* Dilatation::apply(OsteoporosisImage* image)
 {
-    OsteoporosisImage* resul = new OsteoporosisImage(image->getSize());
+    OsteoporosisImage* resul = image->clone();
     int max;
 
     for (int x = 1; x < image->getWidth()-1; x++)
