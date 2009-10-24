@@ -1,17 +1,19 @@
 #ifndef MEDIAN_H
 #define MEDIAN_H
 #include "filter.h"
-#include "matrix.h"
+
 #include <QVector>
 
-class Median : public Filter
+class MedianFilter : public Filter
 {
-//private:
-//    QVector <Matrix *> mask;
+private:
+    QVector<float> *values;
+
+protected:
+    int getPonderation(int i, int j, OsteoporosisImage* image);
 
 public:
-    Median();
-    //class OsteoporosisImage* apply(class OsteoporosisImage* image);
+    MedianFilter();
 
 };
 

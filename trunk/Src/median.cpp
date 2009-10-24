@@ -1,63 +1,33 @@
 #include "median.h"
 
-Median::Median()
+MedianFilter::MedianFilter()
 {
-    float a = 1.0f;
-    float b = 2.0f;
-
-    Matrix *matrix = new Matrix(3,3);
-    matrix->set(0,0,-a);matrix->set(0,1,0);matrix->set(0,2,a);
-    matrix->set(1,0,-b);matrix->set(1,1,0);matrix->set(1,2,b);
-    matrix->set(2,0,-a);matrix->set(2,1,0);matrix->set(2,2,a);
-    mask.push_back(matrix);
-
-    //filtro noreste
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,-a);matrix->set(0,1,-b);matrix->set(0,2,-a);
-    matrix->set(1,0,0);matrix->set(1,1,0);matrix->set(1,2,0);
-    matrix->set(2,0,a);matrix->set(2,1,b);matrix->set(2,2,a);
-    mask.push_back(matrix);
-
-    //filtro sur
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,a);matrix->set(0,1,0);matrix->set(0,2,-a);
-    matrix->set(1,0,b);matrix->set(1,1,0);matrix->set(1,2,-b);
-    matrix->set(2,0,a);matrix->set(2,1,0);matrix->set(2,2,-a);
-    mask.push_back(matrix);
-
-    //filtro este
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,a);matrix->set(0,1,b);matrix->set(0,2,a);
-    matrix->set(1,0,0);matrix->set(1,1,0);matrix->set(1,2,0);
-    matrix->set(2,0,-a);matrix->set(2,1,-b);matrix->set(2,2,-a);
-    mask.push_back(matrix);
-
-    //filtro oeste
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,-b);matrix->set(0,1,-a);matrix->set(0,2,0);
-    matrix->set(1,0,-a);matrix->set(1,1,0);matrix->set(1,2,a);
-    matrix->set(2,0,0);matrix->set(2,1,a);matrix->set(2,2,b);
-    mask.push_back(matrix);
-
-    //filtro sureste
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,b);matrix->set(0,1,a);matrix->set(0,2,0);
-    matrix->set(1,0,a);matrix->set(1,1,0);matrix->set(1,2,-a);
-    matrix->set(2,0,0);matrix->set(2,1,-a);matrix->set(2,2,-b);
-    mask.push_back(matrix);
-
-    //filtro suroeste
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,0);matrix->set(0,1,a);matrix->set(0,2,b);
-    matrix->set(1,0,-a);matrix->set(1,1,0);matrix->set(1,2,a);
-    matrix->set(2,0,-b);matrix->set(2,1,-a);matrix->set(2,2,0);
-    mask.push_back(matrix);
-
-    matrix = new Matrix(3,3);
-    matrix->set(0,0,0);matrix->set(0,1,-a);matrix->set(0,2,-b);
-    matrix->set(1,0,a);matrix->set(1,1,0);matrix->set(1,2,-a);
-    matrix->set(2,0,b);matrix->set(2,1,a);matrix->set(2,2,0);
-    mask.push_back(matrix);
+    this->values = new QVector<float>;
 }
 
+int MedianFilter::getPonderation(int i, int j, OsteoporosisImage* image)
+{
+    for (int y = -1; y < 2; y++)
+        for (int x = -1; x < 2; x++)
+        {
+            float pixelColor = image->getColorAt(x+j,y+i);
+            if (pixelColor >= 0)
+            {
+                if (this->values->size() == 0)
+                    this->values->push_front(pixelColor);
+                else
+                {
+                    int index = 0;
+                    for (; index < this->values->size() and this->values->at(index) < pixelColor; index++);
+                    this->values->insert(index,pixelColor);
+                }
+            }
+        }
 
+    float color = this->values->at(this->values->size()/2);
+
+    if (this->max < color) this->max = color;
+    if (this->min > color) this->min = color;
+
+    return color;
+}
