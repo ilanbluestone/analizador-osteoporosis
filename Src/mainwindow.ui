@@ -232,7 +232,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>29</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_Archivo">
@@ -317,6 +317,7 @@
     <addaction name="actionErosi_n_condicional"/>
     <addaction name="separator"/>
     <addaction name="actionEsqueletizacion"/>
+    <addaction name="actionEliminar_ruido"/>
     <addaction name="separator"/>
     <addaction name="actionBuscar_Ward"/>
    </widget>
@@ -481,6 +482,11 @@
   <action name="actionBuscar_Ward">
    <property name="text">
     <string>Buscar Ward</string>
+   </property>
+  </action>
+  <action name="actionEliminar_ruido">
+   <property name="text">
+    <string>Eliminar ruido</string>
    </property>
   </action>
  </widget>
