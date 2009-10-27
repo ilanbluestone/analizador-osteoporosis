@@ -20,6 +20,7 @@ private:
     void checkOff(int x, int y, OsteoporosisImage* image, bool* path, QList<QPoint>* list);
     QList<QPoint> neighbords(int x, int y, OsteoporosisImage* image);
 
+    void rotate(float x, float y, float *rx, float *ry, float angle);
 public:
     WardFinder();
 

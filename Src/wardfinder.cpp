@@ -1,6 +1,7 @@
 #include "wardfinder.h"
 #include <QPainter>
 #include </usr/include/math.h>
+#include <QDebug>
 
 WardFinder::WardFinder()
 {
@@ -52,8 +53,11 @@ OsteoporosisImage* WardFinder::getPaths()
     QPainter painter(i);
     painter.setPen(QColor(255,0,0));
     painter.drawLine(this->minimumDistance);
+    painter.setPen(QColor(0,0,250));
+    painter.drawLine(this->edge);
     painter.setPen(QColor(0,255,0));
     painter.drawEllipse(this->centerPoint,3,3);
+    painter.drawEllipse(this->criticPoint,3,3);
     resul->setImage(i);
     return resul;
 }
@@ -120,6 +124,58 @@ void WardFinder::findPoints()
                 this->minimumDistance = aux;
             }
         }
-    //this->wardTriangle.push_back(
+
+    this->wardTriangle.push_back(QPoint(this->minimumDistance.x1() + (this->minimumDistance.dx()/2), this->minimumDistance.y1() + (this->minimumDistance.dy()/2)));
     this->centerPoint = QPoint(this->minimumDistance.x1() + (this->minimumDistance.dx()/2), this->minimumDistance.y1() + (this->minimumDistance.dy()/2));
+    //qDebug() << "punto 1: " << (int)(this->minimumDistance.p1().x()) << " " << (int)(this->minimumDistance.p1().y());
+    //qDebug() << "punto 2: " << (int)(this->minimumDistance.p2().x()) << " " << (int)(this->minimumDistance.p2().y());
+    float m = ((float)this->minimumDistance.y1() - (float)this->minimumDistance.y2())/((float)this->minimumDistance.x1() - (float)this->minimumDistance.x2());
+    float angleRad = atan(m) + M_PI;
+    QList<QPoint> rotated;
+
+    for (int i = 0; i < this->path1->size(); i++)
+    {
+        float rx,ry;
+        this->rotate(this->path1->at(i).x(),this->path1->at(i).y(),&rx,&ry,angleRad);
+        rotated.push_back(QPoint(rx,ry));
+    }
+
+    float grade = -1;
+    int index = this->path1->indexOf(this->minimumDistance.p1(),0);
+    bool exit = false;
+    while(index < rotated.size()-5 and !exit)
+    {
+        QLine tangent(rotated.at(index),rotated.at(index + 5));
+        grade = ((float)tangent.y2() - (float)tangent.y1()) / ((float)tangent.x2() - (float)tangent.x1());
+        if (grade >= 0.0f) index++;
+        else exit = true;
+    }
+
+    this->criticPoint = this->path1->at(index);
+    qDebug() << "critico: " << this->criticPoint;
+
+    //qDebug() << "pendiente: " << m;
+    // invierto y cambio de signo
+    m = -1.0f/m;
+    //qDebug() << "pendiente inversa: " << m;
+    // busco punto (y,ANCHO-2)
+    //qDebug() << "punto medio: " << this->centerPoint;
+    double a = (this->paths->getWidth()-2 - this->centerPoint.x());
+    //qDebug() << "valor aux: " << a;
+    int y = m * a + this->centerPoint.y();
+    //qDebug() << "punto 1': " << y << "," << this->paths->getWidth()-2;
+    this->edge.setP1(QPoint(this->paths->getWidth()-2,y));
+    // busco punto (y,20)
+    a = (20 - this->centerPoint.x());
+    //qDebug() << "valor aux: " << a;
+    y = m * a + this->centerPoint.y();
+    //qDebug() << "punto 2': " << y << "," << 20;
+    this->edge.setP2(QPoint(20,y));
+}
+
+void WardFinder::rotate(float x, float y, float *rx, float *ry, float angle)
+{
+ //angle = (3.1416f * angle) / 180.0f;
+ *rx = x * cos(angle) - y * sin(angle);
+ *ry = x * sin(angle) + y * cos(angle);
 }
