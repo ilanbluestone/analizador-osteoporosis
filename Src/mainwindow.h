@@ -68,6 +68,7 @@ private slots:
     void dilatation();
     void skeleton();
     void noise();
+    void hole();
     void ward();
 };
 

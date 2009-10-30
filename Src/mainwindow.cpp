@@ -26,6 +26,7 @@
 #include "median.h"
 #include "wardfinder.h"
 #include "noisefilter.h"
+#include "holefinder.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -67,6 +68,7 @@ void MainWindow::initControls()
     connect(this->ui->tbSelectCP,SIGNAL(pressed()),this,SLOT(setAction_SelCP()));
     connect(this->ui->actionBuscar_Ward,SIGNAL(triggered()),this,SLOT(ward()));
     connect(this->ui->actionEliminar_ruido,SIGNAL(triggered()),this,SLOT(noise()));
+    connect(this->ui->actionEliminar_huecos,SIGNAL(triggered()),this,SLOT(hole()));
     connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
 }
 
@@ -95,6 +97,19 @@ void MainWindow::ward()
         w->findPoints();
         OsteoporosisImage* newImage = w->getPaths();
         this->addImagePage(newImage, "caminos", newElement);
+    }
+
+}
+
+void MainWindow::hole()
+{
+    if (!this->imagePages.empty()){
+        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
+        HoleFinder* h= new HoleFinder();
+        OsteoporosisImage* newImage = h->apply(image);
+        this->addImagePage(newImage, "sin huecos", newElement);
     }
 
 }
