@@ -152,7 +152,7 @@ void WardFinder::findPoints()
     }
 
     this->criticPoint = this->path1->at(index);
-    qDebug() << "critico: " << this->criticPoint;
+    //qDebug() << "critico: " << this->criticPoint;
 
     //qDebug() << "pendiente: " << m;
     // invierto y cambio de signo

@@ -316,6 +316,7 @@
     <addaction name="actionErosion"/>
     <addaction name="actionErosi_n_condicional"/>
     <addaction name="separator"/>
+    <addaction name="actionEliminar_huecos"/>
     <addaction name="actionEsqueletizacion"/>
     <addaction name="actionEliminar_ruido"/>
     <addaction name="separator"/>
@@ -487,6 +488,11 @@
   <action name="actionEliminar_ruido">
    <property name="text">
     <string>Eliminar ruido</string>
+   </property>
+  </action>
+  <action name="actionEliminar_huecos">
+   <property name="text">
+    <string>Eliminar huecos</string>
    </property>
   </action>
  </widget>
