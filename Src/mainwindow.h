@@ -64,12 +64,15 @@ private slots:
     void frei_chen();
     void tools(int tool);
     void erosion();
-    void erosionCond();
+    void condErosion();
     void dilatation();
+    void condDilatation();
     void skeleton();
     void noise();
     void hole();
     void ward();
+    void opening();
+    void closing();
 };
 
 #endif // MAINWINDOW_H

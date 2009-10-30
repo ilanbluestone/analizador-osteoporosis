@@ -15,7 +15,7 @@ private:
 
 public:
     void load(QString path);
-    void saveAs(QString path);
+    void saveAs(QString path, QString* type = 0);
     void save();
     void copyFrom(OsteoporosisImage* image);
     void setPixelColorAt(int x, int y, QRgb color);

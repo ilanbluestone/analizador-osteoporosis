@@ -1,9 +1,9 @@
 #ifndef HILDITCH_H
 #define HILDITCH_H
 
-#include "edgethinning.h"
+#include "neighborhood.h"
 
-class Hilditch : public EdgeThinning
+class Hilditch : public Neighborhood
 {
 public:
     Hilditch();

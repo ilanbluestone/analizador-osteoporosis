@@ -20,8 +20,8 @@
 #include "tools.h"
 #include "erosion.h"
 #include "conditionalerosion.h"
+#include "conditionaldilatation.h"
 #include "dilatation.h"
-#include "rosenfiled_kack.h"
 #include "hilditch.h"
 #include "median.h"
 #include "wardfinder.h"
@@ -58,7 +58,7 @@ void MainWindow::initControls()
     connect(this->ui->actionSobel,SIGNAL(triggered()),this,SLOT(sobel()));
     connect(this->ui->actionGaussiano,SIGNAL(triggered()),this,SLOT(gaussiano()));
     connect(this->ui->actionErosion,SIGNAL(triggered()),this,SLOT(erosion()));
-    connect(this->ui->actionErosi_n_condicional,SIGNAL(triggered()),this,SLOT(erosionCond()));
+    connect(this->ui->actionErosi_n_condicional,SIGNAL(triggered()),this,SLOT(condErosion()));
     connect(this->ui->actionEsqueletizacion,SIGNAL(triggered()),this,SLOT(skeleton()));
     connect(this->ui->actionDilatacion,SIGNAL(triggered()),this,SLOT(dilatation()));
     connect(this->ui->actionRoberts,SIGNAL(triggered()),this,SLOT(roberts()));
@@ -70,15 +70,15 @@ void MainWindow::initControls()
     connect(this->ui->actionEliminar_ruido,SIGNAL(triggered()),this,SLOT(noise()));
     connect(this->ui->actionEliminar_huecos,SIGNAL(triggered()),this,SLOT(hole()));
     connect(this->ui->treeWidget,SIGNAL(itemClicked(QTreeWidgetItem*,int)),this,SLOT(setCurrentPage(QTreeWidgetItem*)));
+    connect(this->ui->actionDilataci_n_condicional,SIGNAL(triggered()),this,SLOT(condDilatation()));
+    connect(this->ui->actionApertura,SIGNAL(triggered()),this,SLOT(opening()));
+    connect(this->ui->actionCierre,SIGNAL(triggered()),this,SLOT(closing()));
 }
 
 void MainWindow::north()
 {
-    Filter* f= new MedianFilter();
-    this->applyFilter("mediana",f);
-
-    //Filter* f= new NorthFilter();
-    //this->applyFilter("Filtro Norte",f);
+    Filter* f= new NorthFilter();
+    this->applyFilter("Filtro Norte",f);
 }
 
 void MainWindow::tools(int tool){
@@ -101,30 +101,32 @@ void MainWindow::ward()
 
 }
 
+void MainWindow::opening()
+{
+
+}
+
+void MainWindow::closing()
+{
+
+}
+
 void MainWindow::hole()
 {
-    if (!this->imagePages.empty()){
-        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
-        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
-        HoleFinder* h= new HoleFinder();
-        OsteoporosisImage* newImage = h->apply(image);
-        this->addImagePage(newImage, "sin huecos", newElement);
-    }
+    HoleFinder* h= new HoleFinder();
+    this->applyTransformation("Huecos rellenados",h);
+}
 
+void MainWindow::condDilatation()
+{
+    ConditionalDilatation* d= new ConditionalDilatation();
+    this->applyTransformation("Dilatación condicional",d);
 }
 
 void MainWindow::noise()
 {
-    if (!this->imagePages.empty()){
-        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
-        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
-        NoiseFilter* n= new NoiseFilter();
-        OsteoporosisImage* newImage = n->apply(image);
-        this->addImagePage(newImage, "eliminar ruido", newElement);
-    }
-
+    NoiseFilter* n= new NoiseFilter();
+    this->applyTransformation("Ruido eliminado",n);
 }
 
 void MainWindow::south()
@@ -217,7 +219,7 @@ void MainWindow::erosion()
     this->applyTransformation("Erosion",t);
 }
 
-void MainWindow::erosionCond()
+void MainWindow::condErosion()
 {
     Transformation* t= new ConditionalErosion();
     this->applyTransformation("Erosion",t);
@@ -225,7 +227,7 @@ void MainWindow::erosionCond()
 
 void MainWindow::skeleton()
 {
-    Transformation* t= new Hilditch();//new Rosenfiled_Kack(4);
+    Transformation* t= new Hilditch();
     this->applyTransformation("Esqueleto",t);
 }
 
@@ -239,8 +241,9 @@ void MainWindow::saveResult()
 {
     int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
     OsteoporosisImage* image = this->imagePages.at(position)->getImage();
-    QString fileName = QFileDialog::getSaveFileName(this,tr("Guardar imagen..."),tr("/home"),tr("Imágenes (*.png *.bmp *.jpg)"));
-    if (!fileName.isEmpty()) image->saveAs(fileName);
+    QString* type;
+    QString fileName = QFileDialog::getSaveFileName(this,tr("Guardar imagen..."),tr("/home"),tr("Imágenes (*.png *.bmp *.jpg)"),type);
+    if (!fileName.isEmpty()) image->saveAs(fileName,type);
 }
 
 void MainWindow::applyFilter (QString name,Filter* f)

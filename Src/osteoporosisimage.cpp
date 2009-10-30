@@ -43,9 +43,13 @@ void OsteoporosisImage::save()
     this->image->save(this->imagePath);
 }
 
-void OsteoporosisImage::saveAs(QString path)
+void OsteoporosisImage::saveAs(QString path, QString* type)
 {
-    this->image->save("/home/walter/Escritorio/imagen.jpg","JPG");
+    char c = (type->constData()->toAscii());
+    if (type)
+        this->image->save(path,&c);
+    else
+        this->image->save(path,"PNG");
 }
 
 OsteoporosisImage *OsteoporosisImage::transform(Transformation *t)
