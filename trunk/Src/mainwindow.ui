@@ -315,6 +315,10 @@
     <addaction name="actionDilatacion"/>
     <addaction name="actionErosion"/>
     <addaction name="actionErosi_n_condicional"/>
+    <addaction name="actionDilataci_n_condicional"/>
+    <addaction name="separator"/>
+    <addaction name="actionApertura"/>
+    <addaction name="actionCierre"/>
     <addaction name="separator"/>
     <addaction name="actionEliminar_huecos"/>
     <addaction name="actionEsqueletizacion"/>
@@ -493,6 +497,21 @@
   <action name="actionEliminar_huecos">
    <property name="text">
     <string>Eliminar huecos</string>
+   </property>
+  </action>
+  <action name="actionDilataci_n_condicional">
+   <property name="text">
+    <string>Dilatación condicional</string>
+   </property>
+  </action>
+  <action name="actionApertura">
+   <property name="text">
+    <string>Apertura</string>
+   </property>
+  </action>
+  <action name="actionCierre">
+   <property name="text">
+    <string>Cierre</string>
    </property>
   </action>
  </widget>

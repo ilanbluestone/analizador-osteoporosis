@@ -1,8 +1,9 @@
 #ifndef NOISEFILTER_H
 #define NOISEFILTER_H
-#include "edgethinning.h"
 
-class NoiseFilter : public EdgeThinning
+#include "neighborhood.h"
+
+class NoiseFilter : public Neighborhood
 {
 public:
     NoiseFilter();

@@ -1,15 +1,14 @@
 #ifndef CONDITIONALEROSION_H
 #define CONDITIONALEROSION_H
 
-#include "transformation.h"
+#include "neighborhood.h"
 
-class ConditionalErosion : public Transformation
+class ConditionalErosion : public Neighborhood
 {
 public:
     ConditionalErosion();
 
     class OsteoporosisImage* apply(class OsteoporosisImage* image);
-    bool condition(int x, int y, OsteoporosisImage* image);
 };
 
 #endif // CONDITIONALEROSION_H
