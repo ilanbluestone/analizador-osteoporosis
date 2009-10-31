@@ -43,11 +43,10 @@ void OsteoporosisImage::save()
     this->image->save(this->imagePath);
 }
 
-void OsteoporosisImage::saveAs(QString path, QString* type)
+void OsteoporosisImage::saveAs(QString path, char* type)
 {
-    char c = (type->constData()->toAscii());
     if (type)
-        this->image->save(path,&c);
+        this->image->save(path,type);
     else
         this->image->save(path,"PNG");
 }

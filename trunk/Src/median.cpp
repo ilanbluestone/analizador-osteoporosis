@@ -17,8 +17,8 @@ int MedianFilter::getPonderation(int i, int j, OsteoporosisImage* image)
                     this->values->push_front(pixelColor);
                 else
                 {
-                    int index = 0;
-                    for (; index < this->values->size() and this->values->at(index) < pixelColor; index++);
+                    int index;
+                    for (index = 0; index < this->values->size() and this->values->at(index) < pixelColor; index++) ;
                     this->values->insert(index,pixelColor);
                 }
             }
