@@ -3,7 +3,7 @@
 
 #include "transformation.h"
 
-class CombinedTransformations : Transformation
+class CombinedTransformations : public Transformation
 {
 private:
     Transformation *t1;

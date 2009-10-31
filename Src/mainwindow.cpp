@@ -27,6 +27,8 @@
 #include "wardfinder.h"
 #include "noisefilter.h"
 #include "holefinder.h"
+#include "closing.h"
+#include "opening.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -88,27 +90,20 @@ void MainWindow::tools(int tool){
 
 void MainWindow::ward()
 {
-    if (!this->imagePages.empty()){
-        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
-        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
-        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
-        WardFinder* w= new WardFinder();
-        w->findPaths(image);
-        w->findPoints();
-        OsteoporosisImage* newImage = w->getPaths();
-        this->addImagePage(newImage, "caminos", newElement);
-    }
-
+    WardFinder* w = new WardFinder(3);
+    this->applyTransformation("Ward",w);
 }
 
 void MainWindow::opening()
 {
-
+    Opening* o = new Opening();
+    this->applyTransformation("Apertura", o);
 }
 
 void MainWindow::closing()
 {
-
+    Closing* c = new Closing();
+    this->applyTransformation("Cerradura",c);
 }
 
 void MainWindow::hole()
@@ -240,13 +235,15 @@ void MainWindow::dilatation()
 void MainWindow::saveResult()
 {
     int position = this->pageLinks.indexOf(this->ui->treeWidget->currentItem());
-    OsteoporosisImage* image = this->imagePages.at(position)->getImage();
-    QString* type;
-    QString fileName = QFileDialog::getSaveFileName(this,tr("Guardar imagen..."),tr("/home"),tr("Imágenes (*.png *.bmp *.jpg)"),type);
-    if (!fileName.isEmpty()) image->saveAs(fileName,type);
+    if (position >= 0)
+    {
+        OsteoporosisImage* image = this->imagePages.at(position)->getImage();
+        QString fileName = QFileDialog::getSaveFileName(this,tr("Guardar imagen..."),tr("/home"),tr("PNG (*.png)"));
+        if (!fileName.isEmpty()) image->saveAs(fileName);
+    }
 }
 
-void MainWindow::applyFilter (QString name,Filter* f)
+void MainWindow::applyFilter(QString name,Filter* f)
 {
     if (!this->imagePages.empty()){
         QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
@@ -257,7 +254,7 @@ void MainWindow::applyFilter (QString name,Filter* f)
     }
 }
 
-void MainWindow::applyTransformation (QString name, Transformation* t)
+void MainWindow::applyTransformation(QString name, Transformation* t)
 {
     if (!this->imagePages.empty()){
         QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
