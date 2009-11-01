@@ -8,6 +8,7 @@ class Umbral : public Transformation
 private:
     int value;
 
+
 public:
     Umbral(int value);
 
