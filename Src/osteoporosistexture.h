@@ -10,12 +10,12 @@ private:
         QVector<float> horizontal;
         QVector<float> vertical;
         OsteoporosisImage* binarizeImage;
-public:
 
+public:
     OsteoporosisTexture(OsteoporosisImage* i);
     // saca el promedio de gris de la imagen para poder binarizarla
     float grayAverage();
-    // Bianriza la imagen dado el promedio de gris
+    // Binariza la imagen dado el promedio de gris
     void binarize();
     //Crea el arreglo horizantal con los cosenos de las filas
     void createHorArray();

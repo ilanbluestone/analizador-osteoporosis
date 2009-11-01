@@ -1,5 +1,6 @@
 #include "osteoporosistexture.h"
 #include "math.h"
+
 OsteoporosisTexture::OsteoporosisTexture(OsteoporosisImage* i)
 {
         image=i;

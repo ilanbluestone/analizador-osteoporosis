@@ -312,6 +312,8 @@
     <property name="title">
      <string>Transformaciones</string>
     </property>
+    <addaction name="actionBinarizar_imagen"/>
+    <addaction name="separator"/>
     <addaction name="actionDilatacion"/>
     <addaction name="actionErosion"/>
     <addaction name="actionErosi_n_condicional"/>
@@ -512,6 +514,16 @@
   <action name="actionCierre">
    <property name="text">
     <string>Cierre</string>
+   </property>
+  </action>
+  <action name="actionUmbralizar_automaticamente">
+   <property name="text">
+    <string>Umbralizar automaticamente</string>
+   </property>
+  </action>
+  <action name="actionBinarizar_imagen">
+   <property name="text">
+    <string>Binarizar imagen</string>
    </property>
   </action>
  </widget>

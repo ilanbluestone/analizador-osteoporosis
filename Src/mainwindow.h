@@ -34,7 +34,6 @@ private:
     void initControls();
 
 private slots:
-
     void on_tbDiagnosticate_clicked();
     void on_actionUmbral_triggered();
     void on_actionEcualizacion_triggered();
@@ -73,6 +72,7 @@ private slots:
     void ward();
     void opening();
     void closing();
+    void binarized();
 };
 
 #endif // MAINWINDOW_H
