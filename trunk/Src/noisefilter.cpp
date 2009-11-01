@@ -13,8 +13,8 @@ OsteoporosisImage* NoiseFilter::apply(OsteoporosisImage* im)
     while (changes)
     {
         changes = false;
-        for (int y=1; y < image->getHeight()-1; y++)
-            for (int x=1; x < image->getWidth()-1; x++)
+        for (int y=3; y < image->getHeight()-4; y++)
+            for (int x=3; x < image->getWidth()-4; x++)
                 if (image->getColorAt(x,y) == 255)
                     if ((this->neighborhood8(x,y) <= 1)||((this->neighborhood8(x,y) == 2 && this->trancitions01(x,y)==1)))
                     {

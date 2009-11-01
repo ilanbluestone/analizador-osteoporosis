@@ -7,6 +7,7 @@ class NoiseFilter : public Neighborhood
 {
 public:
     NoiseFilter();
+
     class OsteoporosisImage* apply(class OsteoporosisImage* image);
 };
 

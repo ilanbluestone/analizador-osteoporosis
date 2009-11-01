@@ -29,6 +29,7 @@
 #include "holefinder.h"
 #include "closing.h"
 #include "opening.h"
+#include "otsu.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -75,6 +76,7 @@ void MainWindow::initControls()
     connect(this->ui->actionDilataci_n_condicional,SIGNAL(triggered()),this,SLOT(condDilatation()));
     connect(this->ui->actionApertura,SIGNAL(triggered()),this,SLOT(opening()));
     connect(this->ui->actionCierre,SIGNAL(triggered()),this,SLOT(closing()));
+    connect(this->ui->actionBinarizar_imagen,SIGNAL(triggered()),this,SLOT(binarized()));
 }
 
 void MainWindow::north()
@@ -86,6 +88,20 @@ void MainWindow::north()
 void MainWindow::tools(int tool){
     Tools* dialog = new Tools(this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage(),tool, this);
     dialog->show();
+}
+
+void MainWindow::binarized()
+{
+    if (!this->imagePages.empty()){
+        Otsu* o = new Otsu;
+        QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
+        QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
+        OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
+        int index = o->getOptimalValue(image->getHistogram());
+        Umbral* u = new Umbral(index);
+        OsteoporosisImage* newImage = u->apply(image);
+        this->addImagePage(newImage, "Imagen binarizada", newElement);
+    }
 }
 
 void MainWindow::ward()
