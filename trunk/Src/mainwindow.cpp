@@ -30,6 +30,7 @@
 #include "closing.h"
 #include "opening.h"
 #include "otsu.h"
+#include "osteoporosistexture.h"
 
 #include <QFileDialog>
 #include <QString>
@@ -106,8 +107,10 @@ void MainWindow::binarized()
 
 void MainWindow::ward()
 {
-    WardFinder* w = new WardFinder(3);
+    WardFinder* w = new WardFinder(50);
     this->applyTransformation("Ward",w);
+
+    //OsteoporosisTexture *ot = new OsteoporosisTexture();
 }
 
 void MainWindow::opening()

@@ -10,15 +10,18 @@ class WardFinder : public Transformation
 {
 private:
     OsteoporosisImage* image;               // imagen binarizada y mejorada de los bordes del hueso
-    QList<QPoint>* path1, *path2;           // bordes del hueso femoral (caminos a recorrer)
-    QPoint starterPoint1, starterPoint2;    // puntos donde comienzan los dos bordes del hueso
-    QLine minimumDistance;                  // recta de distancia minima del cuello femoral
-    QPoint centerPoint;                     // punto centrado en la recta de minima distancia
-    QLine edge;                             // eje de simetria del cuello femoral
-    QPoint criticPoint;                     // punto en el que comienza la base del triangulo
-    QLine base;                             // base del triangulo de ward
-    QPolygon wardTriangle;                  // triangulo de ward
-    QPoint triangleCenter;                  // centro del triangulo de Ward
+    QList<QPoint> *path1, *path2;           // bordes del hueso femoral (caminos a recorrer)
+    QLineF minimumDistance;                 // recta de distancia minima del cuello femoral
+    QPointF centerPoint;                    // punto centrado en la recta de minima distancia
+    QLineF edge;                            // eje de simetria del cuello femoral
+    QPointF criticPoint;                    // punto en el que comienza la base del triangulo
+    QLineF base;                            // base del triangulo de ward
+    QPolygonF wardTriangle;                 // triangulo de ward
+    QPolygonF neckZone;                     // region del cuello
+    QPolygonF interTroch;                   // region intertrochanteric
+    QPolygonF troch;                        // region trochanteric
+    QRect wardZone;                         // cuadrado de dimension n
+    QPointF triangleCenter;                 // centro del triangulo de Ward
     int n;                                  // dimension del cuadrado centrado en el triangulo
 
     void checkOff(int x, int y, OsteoporosisImage* image, bool* path, QList<QPoint>* list);
@@ -28,10 +31,17 @@ private:
     void findEdges();
     void findCriticPoint();
     void defineRegions();
-    void defineWardTriangle();              // busca un cuadrado de nxn centrado en el triangulo
+    void defineWardTriangle();
+    QRect getWardZone();
+    QPolygonF getWardTriangle();
+    QPolygonF getNeckZone();
+    QPolygonF getTrochZone();
+    QPolygonF getInterTrochZone();
+    QPolygonF getSimetricEdge();
 
 public:
     WardFinder(int n);
+
     class OsteoporosisImage* apply(class OsteoporosisImage* image);
 
 };
