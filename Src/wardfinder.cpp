@@ -31,13 +31,17 @@ OsteoporosisImage* WardFinder::apply(OsteoporosisImage* image)
     QImage *i = resul->getImage();
     QPainter painter(i);
     painter.setPen(QColor(255,0,0));
-    painter.drawLine(this->minimumDistance);
-    painter.drawLine(this->base);
+    //painter.drawLine(this->minimumDistance);
+    //painter.drawLine(this->base);
+    painter.drawPolygon(this->neckZone);
     painter.setPen(QPen(QColor(0,50,200), 1, Qt::DashLine));
     painter.drawLine(this->edge);
     painter.setPen(QColor(0,255,0));
-    painter.drawEllipse(this->centerPoint,3,3);
-    painter.drawEllipse(this->criticPoint,3,3);
+    painter.drawRect(this->wardZone);
+    painter.setPen(QColor(0,255,250));
+    //painter.drawEllipse(this->centerPoint,3,3);
+    //painter.drawEllipse(this->criticPoint,3,3);
+    painter.drawEllipse(this->triangleCenter,3,3);
     painter.drawPolygon(this->wardTriangle, Qt::WindingFill);
     resul->setImage(i);
     return resul;
@@ -93,7 +97,7 @@ void WardFinder::findEdges()
         }
 
     // calculo el punto medio de la recta de minima distancia
-    this->centerPoint = QPoint(this->minimumDistance.x1() + (this->minimumDistance.dx()/2), this->minimumDistance.y1() + (this->minimumDistance.dy()/2));
+    this->centerPoint = QPointF(this->minimumDistance.x1() + ((float)this->minimumDistance.dx()/2.0f), this->minimumDistance.y1() + ((float)this->minimumDistance.dy()/2.0f));
 
     // calculo la pendiente de la recta de minima distancia
     float m = ((float)this->minimumDistance.y1() - (float)this->minimumDistance.y2())/((float)this->minimumDistance.x1() - (float)this->minimumDistance.x2());
@@ -104,12 +108,12 @@ void WardFinder::findEdges()
     // calculo punto P1 para el eje (y,ANCHO-2) con la ecuacion de la recta
     double a = (this->image->getWidth()-2 - this->centerPoint.x());
     int y = m * a + this->centerPoint.y();
-    this->edge.setP1(QPoint(this->image->getWidth()-2,y));
+    this->edge.setP1(QPointF(this->image->getWidth()-2,y));
 
     // calculo punto P2 para el eje (y,50) con la ecuacion de la recta
     a = (50 - this->centerPoint.x());
     y = m * a + this->centerPoint.y();
-    this->edge.setP2(QPoint(50,y));
+    this->edge.setP2(QPointF(50,y));
 }
 
 void WardFinder::findCriticPoint()
@@ -122,22 +126,22 @@ void WardFinder::findCriticPoint()
     float angleRad = atan(m) + M_PI;
 
     // roto los puntos del borde superior...
-    QList<QPoint> rotated;
+    QList<QPointF> rotated;
     for (int i = 0; i < this->path1->size(); i++)
     {
         float rx,ry;
         this->rotate(this->path1->at(i).x(),this->path1->at(i).y(),&rx,&ry,angleRad);
-        rotated.push_back(QPoint(rx,ry));
+        rotated.push_back(QPointF(rx,ry));
     }
 
     // comienzo con una pendiente negativa y busco el punto aproximado donde cambia a positiva
     float grade = -1;
-    int index = this->path1->indexOf(this->minimumDistance.p1(),0);
+    int index = this->path1->indexOf(this->minimumDistance.p1().toPoint(),0);
     bool exit = false;
 
     while(index < rotated.size()-5 and !exit)
     {
-        QLine tangent(rotated.at(index),rotated.at(index + 5));
+        QLineF tangent(rotated.at(index),rotated.at(index + 5));   // aproximamos tangentes con rectas de 5 pts de longitud
         grade = ((float)tangent.y2() - (float)tangent.y1()) / ((float)tangent.x2() - (float)tangent.x1());
         if (grade >= 0.0f) index++;
         else exit = true;
@@ -161,13 +165,13 @@ void WardFinder::findCriticPoint()
         }
     }
     if (!exit)
-        this->base.setP2(QPoint(0,0));      // por si hay algun caso en que no funcione...
+        this->base.setP2(QPointF(0,0));      // por si hay algun caso en que no funcione...
 }
 
 void WardFinder::defineWardTriangle()
 {
     // punto medio de la recta del cuello
-    this->wardTriangle.push_back(QPoint(this->centerPoint.x(),this->centerPoint.y()));
+    this->wardTriangle.push_back(QPointF(this->centerPoint.x(),this->centerPoint.y()));
 
     // busco los puntos interseccion entre la recta base y las rectas perpendiculares
     // que pasan por los extremos superior e inferior de la recta del cuello...
@@ -187,7 +191,7 @@ void WardFinder::defineWardTriangle()
     float x,y;
     x = (b - a)/(m1 - m2);
     y = m1 * x + a;
-    QPoint p2 = QPoint(x,y);
+    QPointF p2 = QPointF(x,y);
     this->wardTriangle.push_back(p2);
 
     // calculo el segundo punto
@@ -195,13 +199,48 @@ void WardFinder::defineWardTriangle()
     b = ((float)this->minimumDistance.y2() - (m2 * (float)this->minimumDistance.x2()));
     x = (b - a)/(m1 - m2);
     y = m1 * x + a;
-    QPoint p3 = QPoint(x,y);
+    QPointF p3 = QPointF(x,y);
     this->wardTriangle.push_back(p3);
+
+    // calculo el punto de intersecion entre la base y el eje de simetria
+    b = ((float)this->centerPoint.y() - (m2 * (float)this->centerPoint.x()));
+    x = (b - a)/(m1 - m2);
+    y = m1 * x + a;
+
+    // busco el punto medio del triangulo, es decir, la interseccion de las medianas (baricentro o centro de masa)
+    // para eso busco los puntos medios de cada lado del triangulo y defino sus ecuaciones
+    // uso la ecuacion del eje de simetria y busco la interseccion con alguna de las otras 2 medianas
+    QPointF medianPoint(p2.x() + (this->centerPoint.x() - p2.x() )/2.0f, p2.y() + (this->centerPoint.y() - p2.y())/2.0f);
+
+    // pendiente de la mediana
+    float m3 = (medianPoint.y() - p3.y())/(medianPoint.x() - p3.x());
+
+    // calculo la interseccion de las dos rectas
+    a = ((float)p3.y() - (m3 * (float)p3.x()));
+    b = ((float)this->centerPoint.y() - (m2 * (float)this->centerPoint.x()));
+    x = (b - a)/(m3 - m2);
+    y = m3 * x + a;
+
+    this->triangleCenter = QPoint(x,y);
 }
 
 void WardFinder::defineRegions()
 {
-    // para definir, si hay tiempo, el neck, troch e inter-troch
+    // defino el area del cuello del femur
+    int index = this->path2->indexOf(this->minimumDistance.p2().toPoint());
+    int end = this->path2->indexOf(this->base.p2().toPoint());
+
+    for (int i=index; i <= end; i++)
+        this->neckZone.push_front(this->path2->at(i));
+
+    index = this->path1->indexOf(this->minimumDistance.p1().toPoint());
+    end = this->path1->indexOf(this->base.p1().toPoint());
+
+    for (int i=index; i <= end; i++)
+        this->neckZone.push_back(this->path1->at(i));
+
+    // defino el cuadrado de dimension n centrado en el triangulo
+    this->wardZone.setRect(this->triangleCenter.x() - n/2, this->triangleCenter.y() - n/2, n, n);
 }
 
 QList<QPoint> WardFinder::neighbords(int x, int y, QList<QPoint>* visited)
