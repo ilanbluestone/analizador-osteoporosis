@@ -6,7 +6,7 @@
 
 
 enum state {UNDEFINED, DRAWING, FINISHED};
-enum action {NOTHING, SEL_REGION, SEL_TWARD, SEL_CP};
+enum action {NOTHING, SEL_REGION};
 
 class MainWindow;
 

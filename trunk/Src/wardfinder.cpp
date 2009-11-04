@@ -288,3 +288,8 @@ void WardFinder::rotate(float x, float y, float *rx, float *ry, float angle)
     *rx = x * cos(angle) - y * sin(angle);
     *ry = x * sin(angle) + y * cos(angle);
 }
+
+QRect WardFinder::getWardZone()
+{
+    return this->wardZone;
+}
