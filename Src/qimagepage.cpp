@@ -48,8 +48,6 @@ void QImagePage::mousePressEvent(QMouseEvent* event)
                             this->currentState = DRAWING;
                         }
                     } break;
-        case SEL_TWARD: break;
-        case SEL_CP: break;
     }
 }
 
@@ -65,8 +63,6 @@ void QImagePage::mouseMoveEvent(QMouseEvent* event)
                             this->draw();
                         }
                     } break;
-        case SEL_TWARD: break;
-        case SEL_CP: break;
     }
     update();
 }
@@ -81,10 +77,9 @@ void QImagePage::mouseReleaseEvent(QMouseEvent* )
                         this->clearBoard();
                         this->points.clear();
                         this->currentState = UNDEFINED;
+                        this->currentAction = NOTHING;
                         emit this->returnSelection(selection);
                     } break;
-        case SEL_TWARD: break;
-        case SEL_CP: break;
     }
 }
 
@@ -110,8 +105,6 @@ void QImagePage::draw()
                         painter.setPen(QPen(Qt::red, 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                         painter.drawRect(QRect(this->points.first(),this->points.last()));
                     } break;
-        case SEL_TWARD: break;
-        case SEL_CP: break;
     }
 }
 

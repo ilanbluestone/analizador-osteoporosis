@@ -34,7 +34,6 @@ private:
     void initControls();
 
 private slots:
-    void on_tbDiagnosticate_clicked();
     void on_actionUmbral_triggered();
     void on_actionEcualizacion_triggered();
     void on_actionNormalizacion_triggered();
@@ -42,8 +41,6 @@ private slots:
     void saveResult();
     void setCurrentPage(QTreeWidgetItem*);
     void setAction_SelRegion();
-    void setAction_SelTWard();
-    void setAction_SelCP();
     void addUserSelection(OsteoporosisImage*);
     void addModifiedImage(OsteoporosisImage* , QString);
     void northWest();

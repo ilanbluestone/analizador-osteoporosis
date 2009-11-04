@@ -11,7 +11,7 @@ void OsteoporosisTexture::binarize()
     binarizeImage=new OsteoporosisImage(this->image->getSize());
     int gray=this->grayAverage();
     for (int i=0; i<this->image->getWidth();i++)
-        for(int j=0; j<this->image->getHeight();i++)
+        for(int j=0; j<this->image->getHeight();j++)
             if (this->image->getColorAt(i,j)< gray)
                 binarizeImage->setColorAt(i,j,0);
             else
@@ -29,7 +29,7 @@ float OsteoporosisTexture::calculateCosHor(int i)
 float OsteoporosisTexture::calculateCosVer(int j)
 {
     float result=0;
-    for (int i=0;j<this->binarizeImage->getHeight();i++)
+    for (int i=0; i<this->binarizeImage->getHeight(); i++)
         result+=this->binarizeImage->getColorAt(i,j);
     return (result/(sqrt(result)*sqrt(this->image->getWidth())));
 }

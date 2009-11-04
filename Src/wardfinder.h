@@ -32,15 +32,16 @@ private:
     void findCriticPoint();
     void defineRegions();
     void defineWardTriangle();
+
+public:
+    WardFinder(int n);
+
     QRect getWardZone();
     QPolygonF getWardTriangle();
     QPolygonF getNeckZone();
     QPolygonF getTrochZone();
     QPolygonF getInterTrochZone();
     QPolygonF getSimetricEdge();
-
-public:
-    WardFinder(int n);
 
     class OsteoporosisImage* apply(class OsteoporosisImage* image);
 
