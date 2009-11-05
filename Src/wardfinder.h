@@ -23,6 +23,7 @@ private:
     QRect wardZone;                         // cuadrado de dimension n
     QPointF triangleCenter;                 // centro del triangulo de Ward
     int n;                                  // dimension del cuadrado centrado en el triangulo
+    bool sTWard, sRWard, sEdge, sNeck;      // opciones
 
     void checkOff(int x, int y, OsteoporosisImage* image, bool* path, QList<QPoint>* list);
     QList<QPoint> neighbords(int x, int y, QList<QPoint>* visited);
@@ -35,6 +36,8 @@ private:
 
 public:
     WardFinder(int n);
+
+    void setOptions(bool sTWard, bool sRWard, bool sEdge, bool sNeck);
 
     QRect getWardZone();
     QPolygonF getWardTriangle();

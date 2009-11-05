@@ -41,6 +41,7 @@ private slots:
     void saveResult();
     void setCurrentPage(QTreeWidgetItem*);
     void setAction_SelRegion();
+    void process();
     void addUserSelection(OsteoporosisImage*);
     void addModifiedImage(OsteoporosisImage* , QString);
     void northWest();
