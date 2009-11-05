@@ -8,6 +8,7 @@ WardFinder::WardFinder(int n)
     this->path1 = new QList<QPoint>;
     this->path2 = new QList<QPoint>;
     this->n = n;
+    this->sEdge = this->sNeck = this->sRWard = this->sTWard = true;
 }
 
 OsteoporosisImage* WardFinder::apply(OsteoporosisImage* image)
@@ -31,18 +32,17 @@ OsteoporosisImage* WardFinder::apply(OsteoporosisImage* image)
     QImage *i = resul->getImage();
     QPainter painter(i);
     painter.setPen(QColor(255,0,0));
-    //painter.drawLine(this->minimumDistance);
-    //painter.drawLine(this->base);
-    painter.drawPolygon(this->neckZone);
+    if (this->sNeck) painter.drawPolygon(this->neckZone);
     painter.setPen(QPen(QColor(0,50,200), 1, Qt::DashLine));
-    painter.drawLine(this->edge);
+    if (this->sEdge) painter.drawLine(this->edge);
     painter.setPen(QColor(0,255,0));
-    painter.drawRect(this->wardZone);
+    if (this->sRWard) painter.drawRect(this->wardZone);
     painter.setPen(QColor(0,255,250));
-    //painter.drawEllipse(this->centerPoint,3,3);
-    //painter.drawEllipse(this->criticPoint,3,3);
-    painter.drawEllipse(this->triangleCenter,3,3);
-    painter.drawPolygon(this->wardTriangle, Qt::WindingFill);
+    if (this->sTWard)
+    {
+        painter.drawEllipse(this->triangleCenter,1,1);
+        painter.drawPolygon(this->wardTriangle);
+    }
     resul->setImage(i);
     return resul;
 }
@@ -292,4 +292,12 @@ void WardFinder::rotate(float x, float y, float *rx, float *ry, float angle)
 QRect WardFinder::getWardZone()
 {
     return this->wardZone;
+}
+
+void WardFinder::setOptions(bool sTWard, bool sRWard, bool sEdge, bool sNeck)
+{
+    this->sEdge = sEdge;
+    this->sNeck = sNeck;
+    this->sRWard = sRWard;
+    this->sTWard = sTWard;
 }

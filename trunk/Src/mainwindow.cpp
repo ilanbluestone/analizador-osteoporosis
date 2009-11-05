@@ -68,6 +68,7 @@ void MainWindow::initControls()
     connect(this->ui->actionRoberts,SIGNAL(triggered()),this,SLOT(roberts()));
     connect(this->ui->actionFrei_Chen,SIGNAL(triggered()),this,SLOT(frei_chen()));
     connect(this->ui->btSelRegion,SIGNAL(pressed()),this,SLOT(setAction_SelRegion()));
+    connect(this->ui->btResult,SIGNAL(pressed()),this,SLOT(process()));
     connect(this->ui->actionBuscar_Ward,SIGNAL(triggered()),this,SLOT(ward()));
     connect(this->ui->actionEliminar_ruido,SIGNAL(triggered()),this,SLOT(noise()));
     connect(this->ui->actionEliminar_huecos,SIGNAL(triggered()),this,SLOT(hole()));
@@ -99,7 +100,7 @@ void MainWindow::binarized()
         int index = o->getOptimalValue(image->getHistogram());
         Umbral* u = new Umbral(index);
         OsteoporosisImage* newImage = u->apply(image);
-        this->addImagePage(newImage, "Imagen binarizada", newElement);
+        this->addImagePage(newImage, "Imagen binarizada. Umbral: " + QVariant(index).toString(), newElement);
     }
 }
 
@@ -108,17 +109,19 @@ void MainWindow::ward()
     if (!this->imagePages.empty())
     {
         WardFinder* w = new WardFinder(this->ui->sbDimension->value());
+        w->setOptions(this->ui->ckTWard->isChecked(),this->ui->ckRegion->isChecked(),this->ui->ckEdge->isChecked(),this->ui->ckNeck->isChecked());
         QTreeWidgetItem* top = this->ui->treeWidget->topLevelItem(this->ui->treeWidget->currentIndex().row());
-        //QTreeWidgetItem* cut
         QTreeWidgetItem* father = this->pageLinks.at(this->ui->stackedWidget->currentIndex()-1);
         QTreeWidgetItem* newElement = new QTreeWidgetItem(father);
         OsteoporosisImage* image = this->imagePages.at(this->ui->stackedWidget->currentIndex()-1)->getImage();
         OsteoporosisImage* newImage = image->transform(w);
-        this->addImagePage(newImage, "Triángulo de Ward", newElement);
         QRect r = w->getWardZone();
+        r.setX(r.x()+3);
+        r.setY(r.y()+3);
         OsteoporosisImage* rect = this->imagePages.at(this->pageLinks.indexOf(top))->getImage()->cut(r.topLeft(),r.bottomRight());
         QTreeWidgetItem* test = new QTreeWidgetItem(newElement);
-        this->addImagePage(rect, "Cuadrado de dimensión n", test);
+        this->addImagePage(rect, "Región analizada", test);
+        this->addImagePage(newImage, "Triángulo de Ward", newElement);
         OsteoporosisTexture *ot = new OsteoporosisTexture(rect);
         QString value = QVariant(ot->indexCalculate()).toString();
         value.truncate(6);
@@ -370,4 +373,17 @@ void MainWindow::on_actionNormalizacion_triggered()
 void MainWindow::on_actionEcualizacion_triggered()
 {
     this->tools(3);
+}
+
+void MainWindow::process()
+{
+    this->lowpass();
+    this->lowpass();
+    this->prewitt();
+    this->binarized();
+    this->closing();
+    this->hole();
+    this->skeleton();
+    this->noise();
+    this->ward();
 }
